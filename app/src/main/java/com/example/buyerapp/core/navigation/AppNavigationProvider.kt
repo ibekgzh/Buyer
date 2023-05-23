@@ -8,6 +8,7 @@ import com.example.buyerapp.presenter.destinations.NewPinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.OnBoardingScreenDestination
 import com.example.buyerapp.presenter.destinations.PersonalInfoScreenDestination
 import com.example.buyerapp.presenter.destinations.PinCodeScreenDestination
+import com.example.buyerapp.presenter.destinations.ProductInfoScreenDestination
 import com.ramcosta.composedestinations.navigation.navigate
 
 class AppNavigationProvider(private val navController: NavController) : NavigationProvider {
@@ -50,6 +51,10 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
 
     override fun openPersonalInfo(firstname: String, lastname: String, cellphone: String) {
         navController.navigate(PersonalInfoScreenDestination(firstname, lastname, cellphone))
+    }
+
+    override fun openProductInfo(barcode: String) {
+        navController.navigate(ProductInfoScreenDestination(barcode))
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.buyerapp.data.network
 
 import com.example.buyerapp.data.network.dto.OnBoardingItemRes
+import com.example.buyerapp.data.network.dto.Product
+import com.example.buyerapp.data.network.dto.ProductInfoRes
 import com.example.buyerapp.data.network.dto.auth.AuthCompleteReq
 import com.example.buyerapp.data.network.dto.auth.AuthCompleteRes
 import com.example.buyerapp.data.network.dto.auth.AuthStartReq
@@ -13,6 +15,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -39,5 +42,15 @@ interface ApiService {
 
     @PUT("user")
     suspend fun updateUserInfo(@Body userInfoReq: UserInfoReq): UserInfoRes
+
+    @GET("store/item")
+    suspend fun getProductInfo(
+        @Query("barcode") barcode: String,
+        @Query("storeId") storeId: Long,
+        @Query("uid") uid: String?
+    ): ProductInfoRes
+
+    @POST("cart/item")
+    suspend fun addProduct(@Body product: Product)
 
 }
