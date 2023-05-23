@@ -97,7 +97,7 @@ enum class BottomBarDestination(
     val icon: Int,
     val label: String
 ) {
-    Main(MainScreenDestination, R.drawable.barcode_botton_nav, "main"),
-    Barcode(BarCodeScreenDestination, R.drawable.home_bottom_nav, "bar_code"),
+    Main(MainScreenDestination, R.drawable.home_bottom_nav, "main"),
+    Barcode(BarCodeScreenDestination, R.drawable.barcode_botton_nav, "bar_code"),
     Profile(ProfileScreenDestination, R.drawable.profile_bottom_nav, "profile"),
 }
