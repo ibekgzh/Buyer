@@ -1,12 +1,16 @@
 package com.example.buyerapp.domain.di
 
 import com.example.buyerapp.domain.repository.AuthBuyerRepository
+import com.example.buyerapp.domain.repository.GlobalKeyValueRepository
 import com.example.buyerapp.domain.repository.OnBoardingRepository
 import com.example.buyerapp.domain.repository.UserRepository
 import com.example.buyerapp.domain.usecase.AuthCompleteUseCase
 import com.example.buyerapp.domain.usecase.AuthStartUseCase
+import com.example.buyerapp.domain.usecase.ClearAuthKeyUseCase
+import com.example.buyerapp.domain.usecase.GetAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.GetOnBoardingItemsUseCase
 import com.example.buyerapp.domain.usecase.GetUserInfoUseCase
+import com.example.buyerapp.domain.usecase.SaveAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.SaveUserInfoUseCase
 import dagger.Module
 import dagger.Provides
@@ -17,6 +21,21 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class UseCaseModule {
+
+    @Singleton
+    @Provides
+    fun provideGetAuthKeyUseCase(repository: GlobalKeyValueRepository): GetAuthKeyUseCase =
+        GetAuthKeyUseCase(repository)
+
+    @Singleton
+    @Provides
+    fun provideSaveAuthKeyUseCase(repository: GlobalKeyValueRepository): SaveAuthKeyUseCase =
+        SaveAuthKeyUseCase(repository)
+
+    @Singleton
+    @Provides
+    fun provideClearAuthKeyUseCase(repository: GlobalKeyValueRepository): ClearAuthKeyUseCase =
+        ClearAuthKeyUseCase(repository)
 
     @Singleton
     @Provides
