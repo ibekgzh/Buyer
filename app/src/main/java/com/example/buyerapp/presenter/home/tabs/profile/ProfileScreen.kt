@@ -43,7 +43,7 @@ fun ProfileScreen(
                         it.userInfo.cellphone
                     )
                 },
-                onClickPasswordSafety = { navigator.openPinCode(changePin = true) },
+                onClickPasswordSafety = { navigator.openPinCode() },
                 onClickLogout = { viewModel.onTriggerEvent(ProfileEvent.Logout) }
             )
         }

@@ -53,9 +53,7 @@ fun OnBoardingScreen(
                 .show()
 
             is OnBoardingEffect.OnNavigateToCellPhone -> navigator.openInputCellPhone()
-            is OnBoardingEffect.OnNavigateToPinCode -> navigator.openPinCode(
-                authKey = effect.authKey
-            )
+            is OnBoardingEffect.OnNavigateToPinCode -> navigator.openPinCode()
         }
     }
 

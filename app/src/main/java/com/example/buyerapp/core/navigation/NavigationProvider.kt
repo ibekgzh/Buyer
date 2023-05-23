@@ -10,7 +10,7 @@ interface NavigationProvider {
 
     fun openConfirmOtp(cellphone: String)
 
-    fun openPinCode(changePin: Boolean = false, authKey: String? = null, cellPhone: String? = null)
+    fun openPinCode()
 
     fun openNewPinCode(smsToken: String, cellphone: String)
 

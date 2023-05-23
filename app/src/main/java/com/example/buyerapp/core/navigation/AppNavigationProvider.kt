@@ -7,6 +7,7 @@ import com.example.buyerapp.presenter.destinations.InputCellPhoneScreenDestinati
 import com.example.buyerapp.presenter.destinations.NewPinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.OnBoardingScreenDestination
 import com.example.buyerapp.presenter.destinations.PersonalInfoScreenDestination
+import com.example.buyerapp.presenter.destinations.PinCodeScreenDestination
 import com.ramcosta.composedestinations.navigation.navigate
 
 class AppNavigationProvider(private val navController: NavController) : NavigationProvider {
@@ -31,8 +32,8 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(ConfirmOtpScreenDestination(cellphone))
     }
 
-    override fun openPinCode(changePin: Boolean, authKey: String?, cellPhone: String?) {
-        TODO("Not yet implemented")
+    override fun openPinCode() {
+        navController.navigate(PinCodeScreenDestination)
     }
 
     override fun openNewPinCode(smsToken: String, cellphone: String) {
