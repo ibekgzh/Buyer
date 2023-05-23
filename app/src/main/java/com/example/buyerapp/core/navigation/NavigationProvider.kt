@@ -21,4 +21,6 @@ interface NavigationProvider {
         lastname: String,
         cellphone: String
     )
+
+    fun openProductInfo(barcode: String)
 }

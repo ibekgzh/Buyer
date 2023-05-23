@@ -3,12 +3,15 @@ package com.example.buyerapp.domain.di
 import com.example.buyerapp.domain.repository.AuthBuyerRepository
 import com.example.buyerapp.domain.repository.GlobalKeyValueRepository
 import com.example.buyerapp.domain.repository.OnBoardingRepository
+import com.example.buyerapp.domain.repository.ProductRepository
 import com.example.buyerapp.domain.repository.UserRepository
+import com.example.buyerapp.domain.usecase.AddProductUseCase
 import com.example.buyerapp.domain.usecase.AuthCompleteUseCase
 import com.example.buyerapp.domain.usecase.AuthStartUseCase
 import com.example.buyerapp.domain.usecase.ClearAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.GetAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.GetOnBoardingItemsUseCase
+import com.example.buyerapp.domain.usecase.GetProductByBarCodeUseCase
 import com.example.buyerapp.domain.usecase.GetUserInfoUseCase
 import com.example.buyerapp.domain.usecase.SaveAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.SaveUserInfoUseCase
@@ -61,5 +64,15 @@ class UseCaseModule {
     @Provides
     fun provideSaveUserInfoUseCase(userRepository: UserRepository): SaveUserInfoUseCase =
         SaveUserInfoUseCase(userRepository)
+
+    @Singleton
+    @Provides
+    fun provideGetProductByBarCodeUseCase(productRepository: ProductRepository): GetProductByBarCodeUseCase =
+        GetProductByBarCodeUseCase(productRepository)
+
+    @Singleton
+    @Provides
+    fun provideAddProductUseCase(productRepository: ProductRepository): AddProductUseCase =
+        AddProductUseCase(productRepository)
 
 }

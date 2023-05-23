@@ -115,7 +115,7 @@ fun InputCellPhoneContent(onClickNext: (cellPhone: String) -> Unit) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(0.dp, 20.dp, 0.dp, 0.dp),
+                .padding(top = 20.dp),
         ) {
             Button(
                 onClick = {

@@ -5,10 +5,12 @@ import com.example.buyerapp.data.network.ApiService
 import com.example.buyerapp.data.repository.AuthBuyerRepositoryImpl
 import com.example.buyerapp.data.repository.GlobalKeyValueRepositoryImpl
 import com.example.buyerapp.data.repository.OnBoardingRepositoryImpl
+import com.example.buyerapp.data.repository.ProductRepositoryImpl
 import com.example.buyerapp.data.repository.UserRepositoryImpl
 import com.example.buyerapp.domain.repository.AuthBuyerRepository
 import com.example.buyerapp.domain.repository.GlobalKeyValueRepository
 import com.example.buyerapp.domain.repository.OnBoardingRepository
+import com.example.buyerapp.domain.repository.ProductRepository
 import com.example.buyerapp.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -39,5 +41,10 @@ class RepositoryModule {
     @Provides
     fun provideUserRepository(apiService: ApiService): UserRepository =
         UserRepositoryImpl(apiService)
+
+    @Singleton
+    @Provides
+    fun provideProductRepository(apiService: ApiService): ProductRepository =
+        ProductRepositoryImpl(apiService)
 
 }
