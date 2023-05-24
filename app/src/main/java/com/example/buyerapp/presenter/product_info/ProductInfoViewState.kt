@@ -3,6 +3,7 @@ package com.example.buyerapp.presenter.product_info
 import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.data.network.dto.Product
 import com.example.buyerapp.domain.model.ProductInfo
+import com.example.buyerapp.presenter.pincode.PinCodeEffect
 
 data class ProductViewState(
     val productInfo: ProductInfo,

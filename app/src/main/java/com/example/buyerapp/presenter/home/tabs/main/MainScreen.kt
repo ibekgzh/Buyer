@@ -206,7 +206,8 @@ fun MainCard() {
                             .size(60.dp)
                             .clip(shape = RoundedCornerShape(20.dp))
                             .background(Color.Black)
-                            .clickable { },
+                            .clickable {
+                            },
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(

@@ -34,11 +34,22 @@ fun ProductInfoScreen(
     when (uiState.isLoading) {
         true -> LoadingView()
         false -> {
-            uiState.state?.let {
+            uiState.state?.let { product ->
                 SurfaceTopToolBarBack(
                     onOnclickBackButton = { navigator.navigateUp() }
                 ) {
-                    ProductInfoScreenContent(it.productInfo)
+                    ProductInfoScreenContent(
+                        product.productInfo,
+                        onClickAdd = { amount ->
+                            viewModel.onTriggerEvent(
+                                ProductEvent.AddProduct(
+                                    amount,
+                                    product.productInfo.id.toString()
+                                )
+                            )
+                            navigator.navigateUp()
+                        }
+                    )
                 }
             }
         }

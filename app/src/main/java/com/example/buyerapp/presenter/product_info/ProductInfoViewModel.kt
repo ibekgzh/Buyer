@@ -19,6 +19,7 @@ class ProductInfoViewModel @Inject constructor(
         when (eventType) {
             is ProductEvent.LoadProductInfo -> onLoadProductInfo(eventType.barcode)
             is ProductEvent.AddProduct -> onAddProduct(eventType.amount, eventType.itemId)
+            else -> {}
         }
     }
 

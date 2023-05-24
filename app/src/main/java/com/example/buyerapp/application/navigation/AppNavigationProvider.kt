@@ -2,6 +2,7 @@ package com.example.buyerapp.application.navigation
 
 import androidx.navigation.NavController
 import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
+import com.example.buyerapp.presenter.destinations.BarCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.ConfirmOtpScreenDestination
 import com.example.buyerapp.presenter.destinations.HomeScreenDestination
 import com.example.buyerapp.presenter.destinations.InputCellPhoneScreenDestination

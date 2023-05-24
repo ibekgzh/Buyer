@@ -72,18 +72,19 @@ fun BarCodeScreen(navigator: NavigationProvider) {
                         isBarCode = true
                         isNfc = false
 
-                        scanner.startScan().addOnSuccessListener {
-                            isNfc = false
-                            isBarCode = false
-                            it.rawValue?.let { it1 ->
-                                navigator.openProductInfo(it1)
-                            }
-                                ?: Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT)
-                                    .show()
-                        }.addOnCanceledListener {
-                            isNfc = false
-                            isBarCode = false
-                        }
+                        navigator.openProductInfo("4485149620101")
+//                        scanner.startScan().addOnSuccessListener {
+//                            isNfc = false
+//                            isBarCode = false
+//                            it.rawValue?.let { it1 ->
+//                                navigator.openProductInfo(it1)
+//                            }
+//                                ?: Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT)
+//                                    .show()
+//                        }.addOnCanceledListener {
+//                            isNfc = false
+//                            isBarCode = false
+//                        }
                     },
                     modifier = Modifier
                         .height(52.dp)
