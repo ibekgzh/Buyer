@@ -29,8 +29,7 @@ fun SplashScreen(navigator: NavigationProvider) {
 
     LaunchedEffect(key1 = true) {
         delay(2000)
-        navigator.openHome()
-//        navigator.openOnBoarding()
+        navigator.openOnBoarding()
     }
 
     Column(
