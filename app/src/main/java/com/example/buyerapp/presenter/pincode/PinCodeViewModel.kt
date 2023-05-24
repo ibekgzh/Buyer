@@ -29,7 +29,7 @@ class PinCodeViewModel @Inject constructor(
 
     private fun onPinChecked(pin: String) = safeLaunch {
         execute(pinCheckUseCase(pin)){
-            effectChannel.trySend(PinCodeEffect.OnPinChecked)
+            effectChannel.trySend(PinCodeEffect.OnNavigateHome)
         }
     }
 

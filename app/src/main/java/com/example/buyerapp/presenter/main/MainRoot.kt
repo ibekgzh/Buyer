@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.buyerapp.core.navigation.AppNavigationProvider
+import com.example.buyerapp.application.navigation.AppNavigationProvider
 import com.example.buyerapp.presenter.NavGraphs
 import com.example.buyerapp.ui.theme.BuyerAppTheme
 import com.ramcosta.composedestinations.DestinationsNavHost

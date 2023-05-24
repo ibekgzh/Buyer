@@ -7,6 +7,7 @@ import com.example.buyerapp.data.network.dto.auth.AuthCompleteReq
 import com.example.buyerapp.data.network.dto.auth.AuthCompleteRes
 import com.example.buyerapp.data.network.dto.auth.AuthStartReq
 import com.example.buyerapp.data.network.dto.auth.PinCheckReq
+import com.example.buyerapp.data.network.dto.auth.PinResetConfirmReq
 import com.example.buyerapp.data.network.dto.user_info.UserInfoReq
 import com.example.buyerapp.data.network.dto.user_info.UserInfoRes
 import retrofit2.http.Body
@@ -36,6 +37,12 @@ interface ApiService {
 
     @DELETE("auth/logout")
     suspend fun authLogout()
+
+    @POST("auth/pin/reset/sms")
+    suspend fun authPinResetSms()
+
+    @POST("auth/pin/reset/confirm")
+    suspend fun authPinResetConfirm(@Header("pinOTP") pinOtp: String, @Body pinResetConfirmReq: PinResetConfirmReq)
 
     @GET("user")
     suspend fun getUserInfo(): UserInfoRes

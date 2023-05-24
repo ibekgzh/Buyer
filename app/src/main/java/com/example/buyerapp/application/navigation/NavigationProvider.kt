@@ -1,4 +1,6 @@
-package com.example.buyerapp.core.navigation
+package com.example.buyerapp.application.navigation
+
+import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
 
 interface NavigationProvider {
 
@@ -8,11 +10,11 @@ interface NavigationProvider {
 
     fun openInputCellPhone()
 
-    fun openConfirmOtp(cellphone: String)
+    fun openConfirmOtp(cellphone: String, confirmOtpType: ConfirmOtpType)
 
     fun openPinCode()
 
-    fun openNewPinCode(smsToken: String, cellphone: String)
+    fun openNewPinCode(smsToken: String, cellphone: String, confirmOtpType: ConfirmOtpType)
 
     fun openHome()
 

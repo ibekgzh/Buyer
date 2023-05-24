@@ -1,4 +1,4 @@
-package com.example.buyerapp.presenter.new_pincode.view
+package com.example.buyerapp.core.widget
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.example.buyerapp.R
 
 @Composable
-fun NewPinCodeView(
+fun OtpPinView(
     modifier: Modifier = Modifier,
     pinCount: Int = 4,
     onInputPinCompleted: (pin: String) -> Unit
@@ -44,7 +44,7 @@ fun NewPinCodeView(
         onValueChange = {
             if (it.text.length <= pinCount) {
                 pinValue = it.text
-                if(it.text.length == pinCount && !isCompleted) {
+                if (it.text.length == pinCount && !isCompleted) {
                     isCompleted = true
                     onInputPinCompleted(it.text)
                 }
@@ -63,7 +63,6 @@ fun NewPinCodeView(
                         index = index,
                         text = pinValue
                     )
-//                    Spacer(modifier = Modifier.width(8.dp))
                 }
             }
         }

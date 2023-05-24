@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".BuyerApplication"
+        android:name=".application.BuyerApplication"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,9 +15,8 @@
         android:theme="@style/Theme.BuyerApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".application.ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.BuyerApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

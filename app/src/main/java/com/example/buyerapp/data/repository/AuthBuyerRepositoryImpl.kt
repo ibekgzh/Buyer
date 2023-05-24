@@ -4,6 +4,7 @@ import com.example.buyerapp.data.network.ApiService
 import com.example.buyerapp.data.network.dto.auth.AuthCompleteReq
 import com.example.buyerapp.data.network.dto.auth.AuthStartReq
 import com.example.buyerapp.data.network.dto.auth.PinCheckReq
+import com.example.buyerapp.data.network.dto.auth.PinResetConfirmReq
 import com.example.buyerapp.data.network.dto.auth.toDomain
 import com.example.buyerapp.domain.model.AuthComplete
 import com.example.buyerapp.domain.repository.AuthBuyerRepository
@@ -32,5 +33,11 @@ class AuthBuyerRepositoryImpl @Inject constructor(val apiService: ApiService) :
         return apiService.authPinCheck(PinCheckReq(pin))
     }
 
+    override suspend fun pinResetSms() {
+        return apiService.authPinResetSms()
+    }
 
+    override suspend fun pinResetConfirm(pinOtp: String, pin: String) {
+        return apiService.authPinResetConfirm(pinOtp, PinResetConfirmReq(pin))
+    }
 }

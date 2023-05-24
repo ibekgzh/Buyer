@@ -1,6 +1,7 @@
-package com.example.buyerapp.core.navigation
+package com.example.buyerapp.application.navigation
 
 import androidx.navigation.NavController
+import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
 import com.example.buyerapp.presenter.destinations.ConfirmOtpScreenDestination
 import com.example.buyerapp.presenter.destinations.HomeScreenDestination
 import com.example.buyerapp.presenter.destinations.InputCellPhoneScreenDestination
@@ -29,16 +30,16 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(InputCellPhoneScreenDestination)
     }
 
-    override fun openConfirmOtp(cellphone: String) {
-        navController.navigate(ConfirmOtpScreenDestination(cellphone))
+    override fun openConfirmOtp(cellphone: String, confirmOtpType: ConfirmOtpType) {
+        navController.navigate(ConfirmOtpScreenDestination(confirmOtpType, cellphone))
     }
 
     override fun openPinCode() {
         navController.navigate(PinCodeScreenDestination)
     }
 
-    override fun openNewPinCode(smsToken: String, cellphone: String) {
-        navController.navigate(NewPinCodeScreenDestination(smsToken, cellphone))
+    override fun openNewPinCode(smsToken: String, cellphone: String, confirmOtpType: ConfirmOtpType) {
+        navController.navigate(NewPinCodeScreenDestination(confirmOtpType, smsToken, cellphone))
     }
 
     override fun openHome() {

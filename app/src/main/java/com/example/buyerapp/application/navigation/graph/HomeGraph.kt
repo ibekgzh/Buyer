@@ -1,4 +1,4 @@
-package com.example.buyerapp.core.navigation.graph
+package com.example.buyerapp.application.navigation.graph
 
 import com.ramcosta.composedestinations.annotation.NavGraph
 

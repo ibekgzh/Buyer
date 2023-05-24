@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
 import com.example.buyerapp.core.framework.mvi.BaseEffect
-import com.example.buyerapp.core.navigation.NavigationProvider
+import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.core.widget.SurfaceTopToolBarBack
 import com.example.buyerapp.presenter.product_info.view.ProductInfoScreenContent

@@ -17,7 +17,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.buyerapp.R
-import com.example.buyerapp.core.navigation.NavigationProvider
+import com.example.buyerapp.application.navigation.NavigationProvider
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import kotlinx.coroutines.delay
@@ -29,8 +29,7 @@ fun SplashScreen(navigator: NavigationProvider) {
 
     LaunchedEffect(key1 = true) {
         delay(2000)
-        navigator.openHome()
-//        navigator.openOnBoarding()
+        navigator.openOnBoarding()
     }
 
     Column(

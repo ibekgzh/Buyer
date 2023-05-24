@@ -33,8 +33,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
-import com.example.buyerapp.core.navigation.NavigationProvider
-import com.example.buyerapp.core.navigation.graph.HomeNavGraph
+import com.example.buyerapp.application.navigation.NavigationProvider
+import com.example.buyerapp.application.navigation.graph.HomeNavGraph
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.ramcosta.composedestinations.annotation.Destination
 

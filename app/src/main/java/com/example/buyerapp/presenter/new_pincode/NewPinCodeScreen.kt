@@ -8,15 +8,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
 import com.example.buyerapp.core.framework.mvi.BaseEffect
-import com.example.buyerapp.core.navigation.NavigationProvider
+import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.core.widget.SurfaceTopToolBarBack
+import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
 import com.example.buyerapp.presenter.new_pincode.view.NewPinCodeContent
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
 @Composable
 fun NewPinCodeScreen(
+    confirmOtpType: ConfirmOtpType,
     smsToken: String,
     cellPhone: String,
     viewModel: NewPinCodeViewModal = hiltViewModel(),
@@ -33,7 +35,13 @@ fun NewPinCodeScreen(
         } else {
             NewPinCodeContent(
                 onInputPinComplete = {
-                    viewModel.onTriggerEvent(NewPinCodeEvent.Complete(smsToken, cellPhone, it))
+                    when(confirmOtpType){
+                        ConfirmOtpType.AUTH_COMPLETE ->
+                            viewModel.onTriggerEvent(NewPinCodeEvent.Complete(smsToken, cellPhone, it))
+                        ConfirmOtpType.PIN_RESET ->
+                            viewModel.onTriggerEvent(NewPinCodeEvent.ResetConfirm(smsToken, it))
+                    }
+
                 }
             )
         }

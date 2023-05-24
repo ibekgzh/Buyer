@@ -17,10 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
 import com.example.buyerapp.core.framework.mvi.BaseEffect
-import com.example.buyerapp.core.navigation.NavigationProvider
+import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.core.widget.PinCodeView
 import com.example.buyerapp.domain.model.longname
+import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
 import com.example.buyerapp.presenter.pincode.view.PinCodeHeader
 import com.ramcosta.composedestinations.annotation.Destination
 
@@ -41,25 +42,30 @@ fun PinCodeScreen(
     if (uiState.isLoading) {
         LoadingView()
     } else {
-        PinCodeBody(
-            headerContent = {
-                PinCodeHeader(
-                    fullName = uiState.state?.userInfo?.longname(),
-                    onLogout = {
-                        viewModel.onTriggerEvent(PinCodeEvent.Logout)
+        uiState.state?.let {
+            PinCodeBody(
+                headerContent = {
+                    PinCodeHeader(
+                        fullName = it.userInfo.longname(),
+                        onLogout = {
+                            viewModel.onTriggerEvent(PinCodeEvent.Logout)
+                        },
+                        onClose = {
+                            navigator.navigateUp()
+                        }
+                    )
+                }) {
+
+                PinCodeView(
+                    length = 4,
+                    onInputComplete = {
+                        viewModel.onTriggerEvent(PinCodeEvent.PinCheck(it))
                     },
-                    onClose = {
-                        navigator.navigateUp()
+                    onForgetPinClick = {
+                        navigator.openConfirmOtp(it.userInfo.cellphone, ConfirmOtpType.PIN_RESET)
                     }
                 )
-            }) {
-
-            PinCodeView(
-                length = 4,
-                onInputComplete = {
-                    viewModel.onTriggerEvent(PinCodeEvent.PinCheck(it))
-                }
-            )
+            }
         }
     }
 
@@ -68,11 +74,10 @@ fun PinCodeScreen(
             is BaseEffect.OnError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
                 .show()
 
-            is PinCodeEffect.OnPinChecked -> navigator.openHome()
+            is PinCodeEffect.OnNavigateHome -> navigator.openHome()
             is PinCodeEffect.OnLogout -> navigator.navigateUp()
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)

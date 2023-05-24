@@ -1,6 +1,6 @@
 package com.example.buyerapp.presenter.home
 
-import androidx.compose.foundation.layout.PaddingValues
+import android.annotation.SuppressLint
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.buyerapp.R
-import com.example.buyerapp.core.navigation.NavigationProvider
+import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.presenter.NavGraphs
 import com.example.buyerapp.presenter.appCurrentDestinationAsState
 import com.example.buyerapp.presenter.destinations.BarCodeScreenDestination
@@ -27,6 +27,7 @@ import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.example.buyerapp.presenter.destinations.Destination as HomeDestination
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
@@ -38,8 +39,7 @@ fun HomeScreen(navigator: NavigationProvider) {
         bottomBar = { MBottomNavigation(navController) }) {
         NavigationGraph(
             navController = navController,
-            navigator = navigator,
-            innerPadding = it
+            navigator = navigator
         )
     }
 }
@@ -47,8 +47,7 @@ fun HomeScreen(navigator: NavigationProvider) {
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    navigator: NavigationProvider,
-    innerPadding: PaddingValues
+    navigator: NavigationProvider
 ) {
     DestinationsNavHost(
         navController = navController,
@@ -66,7 +65,7 @@ fun MBottomNavigation(navController: NavController) {
         backgroundColor = Color.White,
         contentColor = Color.Black
     ) {
-        val currentDestination: HomeDestination? =
+        val currentDestination: HomeDestination =
             navController.appCurrentDestinationAsState().value
                 ?: NavGraphs.home.startAppDestination
 

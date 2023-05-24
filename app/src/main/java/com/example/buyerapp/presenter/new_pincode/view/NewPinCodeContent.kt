@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
+import com.example.buyerapp.core.widget.OtpPinView
 
 @Composable
 fun NewPinCodeContent(
@@ -73,7 +74,7 @@ fun NewPinCodeContent(
             modifier = Modifier.padding(0.dp, 14.dp, 0.dp, 0.dp)
         )
 
-        NewPinCodeView(
+        OtpPinView(
             onInputPinCompleted = { onInputPinComplete(it) }
         )
     }

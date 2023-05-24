@@ -13,6 +13,8 @@ import com.example.buyerapp.domain.usecase.GetAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.GetOnBoardingItemsUseCase
 import com.example.buyerapp.domain.usecase.GetProductByBarCodeUseCase
 import com.example.buyerapp.domain.usecase.GetUserInfoUseCase
+import com.example.buyerapp.domain.usecase.PinResetConfirmUseCase
+import com.example.buyerapp.domain.usecase.PinResetSmsUseCase
 import com.example.buyerapp.domain.usecase.SaveAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.SaveUserInfoUseCase
 import dagger.Module
@@ -75,4 +77,13 @@ class UseCaseModule {
     fun provideAddProductUseCase(productRepository: ProductRepository): AddProductUseCase =
         AddProductUseCase(productRepository)
 
+    @Singleton
+    @Provides
+    fun providePinResetSmsUseCase(authBuyerRepository: AuthBuyerRepository): PinResetSmsUseCase =
+        PinResetSmsUseCase(authBuyerRepository)
+
+    @Singleton
+    @Provides
+    fun providePinResetConfirmUseCase(authBuyerRepository: AuthBuyerRepository): PinResetConfirmUseCase =
+        PinResetConfirmUseCase(authBuyerRepository)
 }

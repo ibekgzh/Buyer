@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
 
 @Composable
-fun PinCodeView(length: Int, onInputComplete: (pin: String) -> Unit) {
+fun PinCodeView(length: Int, onInputComplete: (pin: String) -> Unit, onForgetPinClick: () -> Unit) {
 
     val pinCodes = rememberMutableStateListOf<String>()
 
@@ -56,13 +56,15 @@ fun PinCodeView(length: Int, onInputComplete: (pin: String) -> Unit) {
                 fontSize = 15.sp,
                 lineHeight = 15.sp,
                 color = colorResource(id = R.color.black2),
-                modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally),
+                textAlign = TextAlign.Center
             )
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 35.dp, bottom = 32.dp),
+                    .padding(top = 25.dp, bottom = 32.dp),
                 horizontalArrangement = Arrangement.spacedBy(
                     21.dp,
                     alignment = Alignment.CenterHorizontally
@@ -79,6 +81,21 @@ fun PinCodeView(length: Int, onInputComplete: (pin: String) -> Unit) {
 
             Digits(table, pinCodes, length, onInputComplete)
 
+            Text(
+                text = "Забыли код?",
+                fontFamily = FontFamily.Default,
+                fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.W500,
+                fontSize = 15.sp,
+                lineHeight = 15.sp,
+                color = colorResource(id = R.color.black2),
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .clickable {
+                        onForgetPinClick()
+                    }
+            )
+            
         },
         modifier = Modifier
             .fillMaxWidth()

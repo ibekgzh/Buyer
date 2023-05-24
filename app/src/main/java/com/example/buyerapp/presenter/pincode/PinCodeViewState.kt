@@ -14,6 +14,6 @@ sealed class PinCodeEvent {
 }
 
 sealed class PinCodeEffect: BaseEffect() {
-    object OnPinChecked: PinCodeEffect()
+    object OnNavigateHome: PinCodeEffect()
     object OnLogout: PinCodeEffect()
 }
