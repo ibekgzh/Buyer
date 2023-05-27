@@ -1,5 +1,6 @@
 package com.example.buyerapp.data.network
 
+import com.example.buyerapp.data.network.dto.BasketCartItemRes
 import com.example.buyerapp.data.network.dto.OnBoardingItemRes
 import com.example.buyerapp.data.network.dto.Product
 import com.example.buyerapp.data.network.dto.ProductInfoRes
@@ -42,7 +43,10 @@ interface ApiService {
     suspend fun authPinResetSms()
 
     @POST("auth/pin/reset/confirm")
-    suspend fun authPinResetConfirm(@Header("pinOTP") pinOtp: String, @Body pinResetConfirmReq: PinResetConfirmReq)
+    suspend fun authPinResetConfirm(
+        @Header("pinOTP") pinOtp: String,
+        @Body pinResetConfirmReq: PinResetConfirmReq
+    )
 
     @GET("user")
     suspend fun getUserInfo(): UserInfoRes
@@ -59,5 +63,8 @@ interface ApiService {
 
     @POST("cart/item")
     suspend fun addProduct(@Body product: Product)
+
+    @GET("cart")
+    suspend fun getBasketCartItems(): BasketCartItemRes
 
 }

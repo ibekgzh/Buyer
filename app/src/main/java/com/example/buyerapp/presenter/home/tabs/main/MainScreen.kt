@@ -34,13 +34,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
+import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.application.navigation.graph.HomeNavGraph
 import com.ramcosta.composedestinations.annotation.Destination
 
 @HomeNavGraph(start = true)
 @Destination(start = true)
 @Composable
-fun MainScreen() {
+fun MainScreen(navigator: NavigationProvider) {
 
     Column(
         modifier = Modifier
@@ -49,7 +50,7 @@ fun MainScreen() {
             .background(Color.White)
     ) {
 
-        Header()
+        Header(navigator)
 
         Box(
             Modifier
@@ -79,7 +80,7 @@ fun MainScreen() {
 }
 
 @Composable
-fun Header() {
+fun Header(navigator: NavigationProvider) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -104,7 +105,7 @@ fun Header() {
                 Modifier
                     .size(50.dp)
                     .clip(shape = RoundedCornerShape(20.dp))
-                    .clickable { },
+                    .clickable { navigator.openBasket() },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

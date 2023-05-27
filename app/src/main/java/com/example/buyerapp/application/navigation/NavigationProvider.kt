@@ -26,4 +26,6 @@ interface NavigationProvider {
 
     fun openProductInfo(barcode: String)
 
+    fun openBasket()
+
 }

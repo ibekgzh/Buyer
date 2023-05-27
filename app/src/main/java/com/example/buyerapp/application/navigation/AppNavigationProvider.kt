@@ -3,6 +3,7 @@ package com.example.buyerapp.application.navigation
 import androidx.navigation.NavController
 import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
 import com.example.buyerapp.presenter.destinations.BarCodeScreenDestination
+import com.example.buyerapp.presenter.destinations.BasketScreenDestination
 import com.example.buyerapp.presenter.destinations.ConfirmOtpScreenDestination
 import com.example.buyerapp.presenter.destinations.HomeScreenDestination
 import com.example.buyerapp.presenter.destinations.InputCellPhoneScreenDestination
@@ -39,7 +40,11 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(PinCodeScreenDestination)
     }
 
-    override fun openNewPinCode(smsToken: String, cellphone: String, confirmOtpType: ConfirmOtpType) {
+    override fun openNewPinCode(
+        smsToken: String,
+        cellphone: String,
+        confirmOtpType: ConfirmOtpType
+    ) {
         navController.navigate(NewPinCodeScreenDestination(confirmOtpType, smsToken, cellphone))
     }
 
@@ -57,6 +62,10 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
 
     override fun openProductInfo(barcode: String) {
         navController.navigate(ProductInfoScreenDestination(barcode))
+    }
+
+    override fun openBasket() {
+        navController.navigate(BasketScreenDestination)
     }
 
 }

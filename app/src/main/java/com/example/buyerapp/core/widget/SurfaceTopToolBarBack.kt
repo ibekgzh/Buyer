@@ -14,7 +14,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SurfaceTopToolBarBack(
     onOnclickBackButton: () -> Unit,
-    pageContent: @Composable () -> Unit
+    bottomButtonContent: (@Composable () -> Unit) = {},
+    title: String = "",
+    pageContent: @Composable () -> Unit,
 ) {
     Scaffold(
         content = { padding ->
@@ -31,9 +33,11 @@ fun SurfaceTopToolBarBack(
                     .fillMaxWidth()
                     .padding(start = 20.dp)
             ) {
-                BackButton(action = { onOnclickBackButton() })
-//                Text(title)
+                BackButton(action = { onOnclickBackButton() }, title)
             }
+        },
+        bottomBar = {
+            bottomButtonContent()
         },
         contentColor = Color.White,
         containerColor = Color.White

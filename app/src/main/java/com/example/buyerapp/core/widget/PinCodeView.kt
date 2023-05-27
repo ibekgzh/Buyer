@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.listSaver
@@ -81,21 +82,27 @@ fun PinCodeView(length: Int, onInputComplete: (pin: String) -> Unit, onForgetPin
 
             Digits(table, pinCodes, length, onInputComplete)
 
-            Text(
-                text = "Забыли код?",
-                fontFamily = FontFamily.Default,
-                fontStyle = FontStyle.Normal,
-                fontWeight = FontWeight.W500,
-                fontSize = 15.sp,
-                lineHeight = 15.sp,
-                color = colorResource(id = R.color.black2),
-                modifier = Modifier
-                    .align(alignment = Alignment.CenterHorizontally)
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp)
+                    .height(30.dp)
+                    .clip(shape = RoundedCornerShape(20.dp))
                     .clickable {
                         onForgetPinClick()
-                    }
-            )
-            
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Забыли код ?",
+                    fontFamily = FontFamily.Default,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight.W500,
+                    fontSize = 15.sp,
+                    lineHeight = 15.sp,
+                    color = colorResource(id = R.color.black2)
+                )
+            }
         },
         modifier = Modifier
             .fillMaxWidth()
