@@ -3,7 +3,7 @@ package com.example.buyerapp.presenter.order_history
 import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.core.util.dateTomorrow
 import com.example.buyerapp.core.util.dateYesterday
-import com.example.buyerapp.domain.model.Order
+import com.example.buyerapp.domain.model.order_info.Order
 
 data class OrderHistoryViewState(
     val orders: List<Order>

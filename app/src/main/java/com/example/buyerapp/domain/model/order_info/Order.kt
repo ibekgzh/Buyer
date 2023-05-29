@@ -1,4 +1,4 @@
-package com.example.buyerapp.domain.model
+package com.example.buyerapp.domain.model.order_info
 
 import java.util.Date
 

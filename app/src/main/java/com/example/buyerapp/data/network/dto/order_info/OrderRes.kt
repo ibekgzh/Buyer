@@ -1,8 +1,8 @@
 package com.example.buyerapp.data.network.dto.order_info
 
-import com.example.buyerapp.domain.model.Order
-import com.example.buyerapp.domain.model.State
-import com.example.buyerapp.domain.model.Store
+import com.example.buyerapp.domain.model.order_info.Order
+import com.example.buyerapp.domain.model.order_info.State
+import com.example.buyerapp.domain.model.order_info.Store
 import java.util.Date
 
 data class OrderRes(

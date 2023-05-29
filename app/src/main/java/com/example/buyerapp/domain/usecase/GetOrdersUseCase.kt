@@ -3,7 +3,7 @@ package com.example.buyerapp.domain.usecase
 import com.example.buyerapp.core.framework.network.DataState
 import com.example.buyerapp.core.framework.network.apiCall
 import com.example.buyerapp.core.framework.usecase.DataStateUseCase
-import com.example.buyerapp.domain.model.Order
+import com.example.buyerapp.domain.model.order_info.Order
 import com.example.buyerapp.domain.repository.OrderRepository
 import kotlinx.coroutines.flow.FlowCollector
 import javax.inject.Inject
