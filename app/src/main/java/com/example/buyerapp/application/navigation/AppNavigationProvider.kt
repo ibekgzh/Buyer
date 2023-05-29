@@ -2,6 +2,8 @@ package com.example.buyerapp.application.navigation
 
 import androidx.navigation.NavController
 import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
+import com.example.buyerapp.presenter.destinations.BarCodeScreenDestination
+import com.example.buyerapp.presenter.destinations.BasketScreenDestination
 import com.example.buyerapp.presenter.destinations.ConfirmOtpScreenDestination
 import com.example.buyerapp.presenter.destinations.DirectionDestination
 import com.example.buyerapp.presenter.destinations.HomeScreenDestination
@@ -12,6 +14,7 @@ import com.example.buyerapp.presenter.destinations.PersonalInfoScreenDestination
 import com.example.buyerapp.presenter.destinations.PinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.ProductInfoScreenDestination
 import com.example.buyerapp.presenter.pincode.PinCodeScreenMode
+import com.example.buyerapp.presenter.destinations.ShopScreenDestination
 import com.ramcosta.composedestinations.navigation.navigate
 
 class AppNavigationProvider(private val navController: NavController) : NavigationProvider {
@@ -44,7 +47,11 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(PinCodeScreenDestination(pinCodeScreenMode, oldPin))
     }
 
-    override fun openNewPinCode(smsToken: String, cellphone: String, confirmOtpType: ConfirmOtpType) {
+    override fun openNewPinCode(
+        smsToken: String,
+        cellphone: String,
+        confirmOtpType: ConfirmOtpType
+    ) {
         navController.navigate(NewPinCodeScreenDestination(confirmOtpType, smsToken, cellphone))
     }
 
@@ -62,6 +69,14 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
 
     override fun openProductInfo(barcode: String) {
         navController.navigate(ProductInfoScreenDestination(barcode))
+    }
+
+    override fun openBasket() {
+        navController.navigate(BasketScreenDestination)
+    }
+
+    override fun openShop() {
+        navController.navigate(ShopScreenDestination)
     }
 
 }

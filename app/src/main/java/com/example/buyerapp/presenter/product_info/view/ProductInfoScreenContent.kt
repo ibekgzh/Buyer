@@ -3,7 +3,6 @@ package com.example.buyerapp.presenter.product_info.view
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -47,7 +45,7 @@ fun ProductInfoScreenContent(
     onClickAdd: (amount: String) -> Unit,
 ) {
 
-    var count by rememberSaveable { mutableStateOf(0) }
+    var count by rememberSaveable { mutableStateOf(1) }
 
     Column(
         modifier = Modifier
@@ -169,7 +167,7 @@ fun ProductInfoScreenContent(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Стоимость:",
+                        text = "Итого:",
                         fontFamily = FontFamily.Default,
                         fontStyle = FontStyle.Normal,
                         fontWeight = FontWeight.W600,
@@ -180,7 +178,7 @@ fun ProductInfoScreenContent(
                     )
 
                     Text(
-                        text = "₸ " + product.price / 100,
+                        text = "₸ " + (product.price / 100) * count,
                         fontFamily = FontFamily.Default,
                         fontStyle = FontStyle.Normal,
                         fontWeight = FontWeight.W500,

@@ -16,6 +16,7 @@
     <color name="gray2">#F3F3F3</color>
     <color name="gray3">#9D9D9D</color>
     <color name="gray4">#959595</color>
+    <color name="gray5">#ECECEC</color>
     <color name="shop_background">#FFCCE6</color>
     <color name="discount_background">#DACCFF</color>
     <color name="transaction_background">#FEE7B9</color>
@@ -23,5 +24,6 @@
     <color name="pin_code_background">#F3F3F3</color>
     <color name="client_fio_color">#A4A4A4</color>
     <color name="back_button_background">#F3F3F3</color>
+    <color name="basket_remove_background">#DB5C5C</color>
 
 </resources>

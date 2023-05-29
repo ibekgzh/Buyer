@@ -1,5 +1,6 @@
 package com.example.buyerapp.data.network
 
+import com.example.buyerapp.data.network.dto.BasketCartItemRes
 import com.example.buyerapp.data.network.dto.OnBoardingItemRes
 import com.example.buyerapp.data.network.dto.Product
 import com.example.buyerapp.data.network.dto.ProductInfoRes
@@ -67,6 +68,9 @@ interface ApiService {
 
     @POST("cart/item")
     suspend fun addProduct(@Body product: Product)
+
+    @GET("cart")
+    suspend fun getBasketCartItems(): BasketCartItemRes
 
     @POST("order/page")
     suspend fun getOrders(
