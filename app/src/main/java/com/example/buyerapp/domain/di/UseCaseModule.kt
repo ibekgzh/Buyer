@@ -3,6 +3,7 @@ package com.example.buyerapp.domain.di
 import com.example.buyerapp.domain.repository.AuthBuyerRepository
 import com.example.buyerapp.domain.repository.GlobalKeyValueRepository
 import com.example.buyerapp.domain.repository.OnBoardingRepository
+import com.example.buyerapp.domain.repository.OrderRepository
 import com.example.buyerapp.domain.repository.ProductRepository
 import com.example.buyerapp.domain.repository.UserRepository
 import com.example.buyerapp.domain.usecase.AddProductUseCase
@@ -11,8 +12,10 @@ import com.example.buyerapp.domain.usecase.AuthStartUseCase
 import com.example.buyerapp.domain.usecase.ClearAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.GetAuthKeyUseCase
 import com.example.buyerapp.domain.usecase.GetOnBoardingItemsUseCase
+import com.example.buyerapp.domain.usecase.GetOrdersUseCase
 import com.example.buyerapp.domain.usecase.GetProductByBarCodeUseCase
 import com.example.buyerapp.domain.usecase.GetUserInfoUseCase
+import com.example.buyerapp.domain.usecase.PinChangeUseCase
 import com.example.buyerapp.domain.usecase.PinResetConfirmUseCase
 import com.example.buyerapp.domain.usecase.PinResetSmsUseCase
 import com.example.buyerapp.domain.usecase.SaveAuthKeyUseCase
@@ -86,4 +89,14 @@ class UseCaseModule {
     @Provides
     fun providePinResetConfirmUseCase(authBuyerRepository: AuthBuyerRepository): PinResetConfirmUseCase =
         PinResetConfirmUseCase(authBuyerRepository)
+
+    @Singleton
+    @Provides
+    fun providePinChangeUseCase(authBuyerRepository: AuthBuyerRepository): PinChangeUseCase =
+        PinChangeUseCase(authBuyerRepository)
+
+    @Singleton
+    @Provides
+    fun provideGetOrdersUseCase(orderRepository: OrderRepository): GetOrdersUseCase =
+        GetOrdersUseCase(orderRepository)
 }

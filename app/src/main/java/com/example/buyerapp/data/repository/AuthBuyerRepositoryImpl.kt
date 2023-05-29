@@ -3,6 +3,7 @@ package com.example.buyerapp.data.repository
 import com.example.buyerapp.data.network.ApiService
 import com.example.buyerapp.data.network.dto.auth.AuthCompleteReq
 import com.example.buyerapp.data.network.dto.auth.AuthStartReq
+import com.example.buyerapp.data.network.dto.auth.PinChangeReq
 import com.example.buyerapp.data.network.dto.auth.PinCheckReq
 import com.example.buyerapp.data.network.dto.auth.PinResetConfirmReq
 import com.example.buyerapp.data.network.dto.auth.toDomain
@@ -31,6 +32,10 @@ class AuthBuyerRepositoryImpl @Inject constructor(val apiService: ApiService) :
 
     override suspend fun pinCheck(pin: String) {
         return apiService.authPinCheck(PinCheckReq(pin))
+    }
+
+    override suspend fun pinChange(oldPin: String, newPin: String) {
+        return apiService.authPinChange(PinChangeReq(oldPin, newPin))
     }
 
     override suspend fun pinResetSms() {

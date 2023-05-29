@@ -10,6 +10,8 @@ interface AuthBuyerRepository {
 
     suspend fun pinCheck(pin: String)
 
+    suspend fun pinChange(oldPin: String, newPin: String)
+
     suspend fun onLogout()
 
     suspend fun pinResetSms()

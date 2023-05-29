@@ -8,12 +8,14 @@ data class PinCodeViewState(
 )
 
 sealed class PinCodeEvent {
-    data class PinCheck(val pin: String): PinCodeEvent()
-    object Logout: PinCodeEvent()
-    object GetUserInfo: PinCodeEvent()
+    data class PinCheck(val pin: String) : PinCodeEvent()
+    object Logout : PinCodeEvent()
+    object GetUserInfo : PinCodeEvent()
+    data class PinChange(val oldPin: String, val newPin: String) : PinCodeEvent()
 }
 
-sealed class PinCodeEffect: BaseEffect() {
-    object OnNavigateHome: PinCodeEffect()
-    object OnLogout: PinCodeEffect()
+sealed class PinCodeEffect : BaseEffect() {
+    object OnNavigateHome : PinCodeEffect()
+    object OnNavigateUp : PinCodeEffect()
+    object OnNavigateUpProfile : PinCodeEffect()
 }

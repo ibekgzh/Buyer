@@ -43,6 +43,7 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", "\"http://77.240.38.178/api/\"")
+            buildConfigField("String", "DB_NAME", "\"AppDatabase\"")
         }
     }
     compileOptions {
@@ -114,6 +115,8 @@ dependencies {
     //DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("androidx.datastore:datastore:1.0.0")
+    implementation("androidx.room:room-ktx:2.4.2")
+    ksp("androidx.room:room-compiler:2.4.2")
 
     // Scanner QR and Barcode
     implementation("com.google.android.gms:play-services-code-scanner:16.0.0")

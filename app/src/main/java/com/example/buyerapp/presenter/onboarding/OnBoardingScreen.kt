@@ -15,6 +15,7 @@ import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.presenter.onboarding.view.OnBoardingContent
+import com.example.buyerapp.presenter.pincode.PinCodeScreenMode
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -53,7 +54,7 @@ fun OnBoardingScreen(
                 .show()
 
             is OnBoardingEffect.OnNavigateToCellPhone -> navigator.openInputCellPhone()
-            is OnBoardingEffect.OnNavigateToPinCode -> navigator.openPinCode()
+            is OnBoardingEffect.OnNavigateToPinCode -> navigator.openPinCode(PinCodeScreenMode.LOGIN)
         }
     }
 

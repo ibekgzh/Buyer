@@ -13,6 +13,7 @@ import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.application.navigation.graph.HomeNavGraph
 import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.presenter.home.tabs.profile.view.ProfileContent
+import com.example.buyerapp.presenter.pincode.PinCodeScreenMode
 import com.ramcosta.composedestinations.annotation.Destination
 
 @HomeNavGraph
@@ -43,7 +44,7 @@ fun ProfileScreen(
                         it.userInfo.cellphone
                     )
                 },
-                onClickPasswordSafety = { navigator.openPinCode() },
+                onClickPasswordSafety = { navigator.openPinCode(PinCodeScreenMode.PASSWORD_SAFETY) },
                 onClickLogout = { viewModel.onTriggerEvent(ProfileEvent.Logout) }
             )
         }

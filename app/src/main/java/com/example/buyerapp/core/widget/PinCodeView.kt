@@ -35,7 +35,12 @@ import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
 
 @Composable
-fun PinCodeView(length: Int, onInputComplete: (pin: String) -> Unit, onForgetPinClick: () -> Unit) {
+fun PinCodeView(
+    length: Int,
+    title: String,
+    onInputComplete: (pin: String) -> Unit,
+    onForgetPinClick: () -> Unit
+) {
 
     val pinCodes = rememberMutableStateListOf<String>()
 
@@ -49,7 +54,7 @@ fun PinCodeView(length: Int, onInputComplete: (pin: String) -> Unit, onForgetPin
         content = {
 
             Text(
-                text = "Введите код-пароль для входа",
+                text =  title,
                 fontFamily = FontFamily.Default,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.W500,
@@ -95,7 +100,7 @@ fun PinCodeView(length: Int, onInputComplete: (pin: String) -> Unit, onForgetPin
                         onForgetPinClick()
                     }
             )
-            
+
         },
         modifier = Modifier
             .fillMaxWidth()

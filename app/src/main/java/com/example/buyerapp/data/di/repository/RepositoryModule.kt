@@ -1,15 +1,18 @@
 package com.example.buyerapp.data.di.repository
 
 import com.example.buyerapp.data.local.GlobalKeyValueCache
+import com.example.buyerapp.data.local.dao.UserDao
 import com.example.buyerapp.data.network.ApiService
 import com.example.buyerapp.data.repository.AuthBuyerRepositoryImpl
 import com.example.buyerapp.data.repository.GlobalKeyValueRepositoryImpl
 import com.example.buyerapp.data.repository.OnBoardingRepositoryImpl
+import com.example.buyerapp.data.repository.OrderRepositoryImpl
 import com.example.buyerapp.data.repository.ProductRepositoryImpl
 import com.example.buyerapp.data.repository.UserRepositoryImpl
 import com.example.buyerapp.domain.repository.AuthBuyerRepository
 import com.example.buyerapp.domain.repository.GlobalKeyValueRepository
 import com.example.buyerapp.domain.repository.OnBoardingRepository
+import com.example.buyerapp.domain.repository.OrderRepository
 import com.example.buyerapp.domain.repository.ProductRepository
 import com.example.buyerapp.domain.repository.UserRepository
 import dagger.Module
@@ -39,12 +42,17 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideUserRepository(apiService: ApiService): UserRepository =
-        UserRepositoryImpl(apiService)
+    fun provideUserRepository(apiService: ApiService, userDao: UserDao): UserRepository =
+        UserRepositoryImpl(apiService, userDao)
 
     @Singleton
     @Provides
     fun provideProductRepository(apiService: ApiService): ProductRepository =
         ProductRepositoryImpl(apiService)
+
+    @Singleton
+    @Provides
+    fun provideOrderRepository(apiService: ApiService): OrderRepository =
+        OrderRepositoryImpl(apiService)
 
 }

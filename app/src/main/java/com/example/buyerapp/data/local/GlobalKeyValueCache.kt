@@ -20,7 +20,7 @@ class GlobalKeyValueCache @Inject constructor(context: Context) {
         val authKey = stringPreferencesKey(name = "auth_key")
     }
 
-    private val dataStore = context.dataStore;
+    private val dataStore = context.dataStore
 
     suspend fun putAuthKey(key: String) {
         dataStore.edit { preferences ->
@@ -33,7 +33,6 @@ class GlobalKeyValueCache @Inject constructor(context: Context) {
             preferences.remove(PreferencesKey.authKey)
         }
     }
-
 
     suspend fun getAuthKey(): Flow<String?> {
         return dataStore.data.catch { exception ->
