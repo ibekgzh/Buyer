@@ -45,7 +45,7 @@ fun ProductInfoScreenContent(
     onClickAdd: (amount: String) -> Unit,
 ) {
 
-    var count by rememberSaveable { mutableStateOf(0) }
+    var count by rememberSaveable { mutableStateOf(1) }
 
     Column(
         modifier = Modifier
@@ -178,7 +178,7 @@ fun ProductInfoScreenContent(
                     )
 
                     Text(
-                        text = "₸ " + product.price / 100,
+                        text = "₸ " + (product.price / 100) * count,
                         fontFamily = FontFamily.Default,
                         fontStyle = FontStyle.Normal,
                         fontWeight = FontWeight.W500,

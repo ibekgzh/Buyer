@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SurfaceTopToolBarBack(
     onOnclickBackButton: () -> Unit,
-    bottomButtonContent: (@Composable () -> Unit) = {},
     title: String = "",
     pageContent: @Composable () -> Unit,
 ) {
@@ -35,9 +34,6 @@ fun SurfaceTopToolBarBack(
             ) {
                 BackButton(action = { onOnclickBackButton() }, title)
             }
-        },
-        bottomBar = {
-            bottomButtonContent()
         },
         contentColor = Color.White,
         containerColor = Color.White

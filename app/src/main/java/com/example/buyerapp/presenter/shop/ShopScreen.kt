@@ -1,19 +1,18 @@
-package com.example.buyerapp.presenter.basket
+package com.example.buyerapp.presenter.shop
 
 import androidx.compose.runtime.Composable
 import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.core.widget.SurfaceTopToolBarBack
-import com.example.buyerapp.presenter.basket.view.BasketScreenContent
+import com.example.buyerapp.presenter.shop.view.ShopScreenContent
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
 @Composable
-fun BasketScreen(navigator: NavigationProvider) {
+fun ShopScreen(navigator: NavigationProvider) {
 
     SurfaceTopToolBarBack(
-        title = "Корзина",
         onOnclickBackButton = { navigator.navigateUp() }
     ) {
-        BasketScreenContent()
+        ShopScreenContent()
     }
 }

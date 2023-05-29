@@ -12,6 +12,7 @@ import com.example.buyerapp.presenter.destinations.OnBoardingScreenDestination
 import com.example.buyerapp.presenter.destinations.PersonalInfoScreenDestination
 import com.example.buyerapp.presenter.destinations.PinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.ProductInfoScreenDestination
+import com.example.buyerapp.presenter.destinations.ShopScreenDestination
 import com.ramcosta.composedestinations.navigation.navigate
 
 class AppNavigationProvider(private val navController: NavController) : NavigationProvider {
@@ -66,6 +67,10 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
 
     override fun openBasket() {
         navController.navigate(BasketScreenDestination)
+    }
+
+    override fun openShop() {
+        navController.navigate(ShopScreenDestination)
     }
 
 }

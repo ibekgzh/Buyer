@@ -28,4 +28,6 @@ interface NavigationProvider {
 
     fun openBasket()
 
+    fun openShop()
+
 }

@@ -74,7 +74,7 @@ fun MainScreen(navigator: NavigationProvider) {
                 .verticalScroll(rememberScrollState())
         ) {
             MainCard()
-            BottomContent()
+            BottomContent(navigator)
         }
     }
 }
@@ -295,7 +295,7 @@ fun MainCard() {
 }
 
 @Composable
-fun BottomContent() {
+fun BottomContent(navigator: NavigationProvider) {
 
     Column(
         modifier = Modifier
@@ -315,7 +315,7 @@ fun BottomContent() {
                     .fillMaxWidth()
                     .clip(shape = RoundedCornerShape(20.dp))
                     .background(colorResource(id = R.color.shop_background))
-                    .clickable { }
+                    .clickable { navigator.openShop() }
             ) {
                 Column(
                     modifier = Modifier

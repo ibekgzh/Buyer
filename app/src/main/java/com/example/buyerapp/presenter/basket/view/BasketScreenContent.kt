@@ -24,6 +24,7 @@ import androidx.compose.material.SwipeToDismiss
 import androidx.compose.material.rememberDismissState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,22 +47,9 @@ import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
 import com.example.buyerapp.core.widget.rememberMutableStateListOf
 
-@Composable
-fun BasketScreenContent() {
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-            .padding(20.dp)
-    ) {
-        ItemsContent()
-    }
-}
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ItemsContent() {
+fun BasketScreenContent() {
 
     val list = rememberMutableStateListOf(
         "One",
@@ -72,68 +60,77 @@ fun ItemsContent() {
         "Six"
     )
 
-    LazyColumn {
-        itemsIndexed(items = list, key = { _, item -> item.hashCode() }) { _, item ->
-            val state = rememberDismissState(
-                confirmStateChange = {
-                    if (it == DismissValue.DismissedToStart) {
-                        list.remove(item)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(20.dp)
+    ) {
+        LazyColumn(modifier = Modifier.weight(1f)) {
+            itemsIndexed(items = list, key = { _, item -> item.hashCode() }) { _, item ->
+                val state = rememberDismissState(
+                    confirmStateChange = {
+                        if (it == DismissValue.DismissedToStart) {
+                            list.remove(item)
+                        }
+                        true
                     }
-                    true
-                }
-            )
-            SwipeToDismiss(
-                state = state, background = {
-                    Box(
-                        modifier = Modifier
-                            .height(200.dp)
-                            .fillMaxWidth()
-                            .padding(bottom = 20.dp)
-                            .clip(shape = RoundedCornerShape(20.dp))
-                            .background(colorResource(id = R.color.basket_remove_background))
-                    ) {
-                        Icon(
-                            painterResource(id = R.drawable.trash),
-                            contentDescription = "Delete",
+                )
+                SwipeToDismiss(
+                    state = state, background = {
+                        Box(
                             modifier = Modifier
-                                .align(Alignment.CenterEnd)
-                                .padding(end = 15.dp),
-                            tint = Color.White
-                        )
-                    }
-                },
-                dismissContent = {
-                    Card(item = item)
-                },
-                directions = setOf(DismissDirection.EndToStart)
-            )
-        }
-        item {
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color.Black
-                ),
-                shape = RoundedCornerShape(80.dp),
-                border = BorderStroke(1.dp, Color.Black),
-                onClick = {
-
-                }
-            ) {
-                Text(
-                    text = "Добавить еще",
-                    fontFamily = FontFamily.Default,
-                    fontStyle = FontStyle.Normal,
-                    fontWeight = FontWeight.W600,
-                    fontSize = 16.sp,
-                    lineHeight = 30.sp,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center
+                                .height(200.dp)
+                                .fillMaxWidth()
+                                .padding(bottom = 20.dp)
+                                .clip(shape = RoundedCornerShape(20.dp))
+                                .background(colorResource(id = R.color.basket_remove_background))
+                        ) {
+                            Icon(
+                                painterResource(id = R.drawable.trash),
+                                contentDescription = "Delete",
+                                modifier = Modifier
+                                    .align(Alignment.CenterEnd)
+                                    .padding(end = 15.dp),
+                                tint = Color.White
+                            )
+                        }
+                    },
+                    dismissContent = {
+                        Card(item = item)
+                    },
+                    directions = setOf(DismissDirection.EndToStart)
                 )
             }
+            item {
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(52.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = Color.Black
+                    ),
+                    shape = RoundedCornerShape(80.dp),
+                    border = BorderStroke(1.dp, Color.Black),
+                    onClick = {
+
+                    }
+                ) {
+                    Text(
+                        text = "Добавить еще",
+                        fontFamily = FontFamily.Default,
+                        fontStyle = FontStyle.Normal,
+                        fontWeight = FontWeight.W600,
+                        fontSize = 16.sp,
+                        lineHeight = 30.sp,
+                        color = Color.Black,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
         }
+
+        BottomBar()
     }
 }
 
@@ -240,6 +237,74 @@ fun Card(item: String) {
                     color = Color.Black,
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun BottomBar() {
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, bottom = 20.dp, end = 20.dp)
+    ) {
+
+        Divider(
+            color = colorResource(id = R.color.gray2),
+            thickness = 1.dp,
+            modifier = Modifier.padding(top=10.dp, bottom = 5.dp)
+        )
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 20.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Итого:",
+                fontFamily = FontFamily.Default,
+                fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.W600,
+                fontSize = 16.sp,
+                lineHeight = 30.sp,
+                color = Color.Black,
+                textAlign = TextAlign.Center
+            )
+
+            Text(
+                text = "₸ " + 6000,
+                fontFamily = FontFamily.Default,
+                fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.W500,
+                fontSize = 26.sp,
+                lineHeight = 30.sp,
+                color = Color.Black,
+                textAlign = TextAlign.Center
+            )
+        }
+
+        Button(
+            onClick = { },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                contentColor = Color.White,
+                containerColor = Color.Black
+            ),
+            shape = RoundedCornerShape(80.dp)
+        ) {
+            Text(
+                "Купить",
+                fontFamily = FontFamily.Default,
+                fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.W600,
+                fontSize = 16.sp,
+                lineHeight = 30.sp,
+            )
         }
     }
 }
