@@ -377,7 +377,9 @@ fun BottomContent(navigator: NavigationProvider) {
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(20.dp))
                 .background(colorResource(id = R.color.transaction_background))
-                .clickable { }
+                .clickable {
+                    navigator.openOrderHistory()
+                }
         ) {
             Column(
                 modifier = Modifier

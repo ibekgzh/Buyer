@@ -34,4 +34,6 @@ interface NavigationProvider {
 
     fun openShop()
 
+    fun openOrderHistory()
+
 }

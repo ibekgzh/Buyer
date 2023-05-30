@@ -2,7 +2,6 @@ package com.example.buyerapp.application.navigation
 
 import androidx.navigation.NavController
 import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
-import com.example.buyerapp.presenter.destinations.BarCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.BasketScreenDestination
 import com.example.buyerapp.presenter.destinations.ConfirmOtpScreenDestination
 import com.example.buyerapp.presenter.destinations.DirectionDestination
@@ -10,11 +9,12 @@ import com.example.buyerapp.presenter.destinations.HomeScreenDestination
 import com.example.buyerapp.presenter.destinations.InputCellPhoneScreenDestination
 import com.example.buyerapp.presenter.destinations.NewPinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.OnBoardingScreenDestination
+import com.example.buyerapp.presenter.destinations.OrderHistoryScreenDestination
 import com.example.buyerapp.presenter.destinations.PersonalInfoScreenDestination
 import com.example.buyerapp.presenter.destinations.PinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.ProductInfoScreenDestination
-import com.example.buyerapp.presenter.pincode.PinCodeScreenMode
 import com.example.buyerapp.presenter.destinations.ShopScreenDestination
+import com.example.buyerapp.presenter.pincode.PinCodeScreenMode
 import com.ramcosta.composedestinations.navigation.navigate
 
 class AppNavigationProvider(private val navController: NavController) : NavigationProvider {
@@ -77,6 +77,10 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
 
     override fun openShop() {
         navController.navigate(ShopScreenDestination)
+    }
+
+    override fun openOrderHistory() {
+        navController.navigate(OrderHistoryScreenDestination)
     }
 
 }
