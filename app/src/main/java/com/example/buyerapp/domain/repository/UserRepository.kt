@@ -7,4 +7,6 @@ interface UserRepository {
     suspend fun getUserInfo(): UserInfo
 
     suspend fun saveUserInfo(userInfo: UserInfo): UserInfo
+
+    suspend fun deleteUserInfo()
 }

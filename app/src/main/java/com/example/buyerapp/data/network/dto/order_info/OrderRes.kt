@@ -3,12 +3,11 @@ package com.example.buyerapp.data.network.dto.order_info
 import com.example.buyerapp.domain.model.order_info.Order
 import com.example.buyerapp.domain.model.order_info.State
 import com.example.buyerapp.domain.model.order_info.Store
-import java.util.Date
 
 data class OrderRes(
     val id: Long,
     val price: Int,
-    val regDate: Date,
+    val regDate: String,
     val state: StateRes,
     val store: StoreRes
 )
@@ -27,7 +26,7 @@ data class StoreRes(
 )
 
 fun OrderRes.toDomain() =
-    Order(id, price, regDate, state.toDomain(), store.toDomain())
+    Order(id, price / 100, regDate.substring(0, 10), state.toDomain(), store.toDomain())
 
 fun StateRes.toDomain() =
     State(id, descr, color)
@@ -35,6 +34,4 @@ fun StateRes.toDomain() =
 fun StoreRes.toDomain() =
     Store(id, title, logo, color)
 
-fun List<OrderRes>.toDomain() = map {
-    Order(it.id, it.price, it.regDate, it.state.toDomain(), it.store.toDomain())
-}
+fun List<OrderRes>.toDomain() = map { it.toDomain() }

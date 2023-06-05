@@ -1,4 +1,4 @@
-plugins {
+ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
@@ -120,4 +120,8 @@ dependencies {
 
     // Scanner QR and Barcode
     implementation("com.google.android.gms:play-services-code-scanner:16.0.0")
+
+    // QR Render
+    implementation("com.lightspark:compose-qr-code:1.0.1")
+
 }

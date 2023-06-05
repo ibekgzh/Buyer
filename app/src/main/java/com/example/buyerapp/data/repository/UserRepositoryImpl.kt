@@ -28,4 +28,8 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun saveUserInfo(userInfo: UserInfo): UserInfo {
         return apiService.updateUserInfo(userInfo.toDto()).toDomain()
     }
+
+    override suspend fun deleteUserInfo() {
+        return userDao.deleteAll()
+    }
 }

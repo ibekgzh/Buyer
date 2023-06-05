@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.buyerapp.BuildConfig
 import com.example.buyerapp.data.local.GlobalKeyValueCache
+import com.example.buyerapp.data.local.dao.StoreDao
 import com.example.buyerapp.data.local.dao.UserDao
 import com.example.buyerapp.data.local.db.AppDatabase
 import dagger.Module
@@ -48,5 +49,11 @@ class LocalStorageModule {
     @Singleton
     fun provideUserDao(appDatabase: AppDatabase): UserDao {
         return appDatabase.getUserDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideStoreDao(appDatabase: AppDatabase): StoreDao {
+        return appDatabase.getStoreDao()
     }
 }

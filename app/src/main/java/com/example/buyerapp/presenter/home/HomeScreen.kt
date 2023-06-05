@@ -1,24 +1,39 @@
 package com.example.buyerapp.presenter.home
 
 import android.annotation.SuppressLint
+import android.widget.Toast
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.buyerapp.R
 import com.example.buyerapp.application.navigation.NavigationProvider
+import com.example.buyerapp.application.navigation.home.HomeNavigationProviderImpl
+import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
+import com.example.buyerapp.core.framework.mvi.BaseEffect
+import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.presenter.NavGraphs
 import com.example.buyerapp.presenter.appCurrentDestinationAsState
 import com.example.buyerapp.presenter.destinations.BarCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.MainScreenDestination
 import com.example.buyerapp.presenter.destinations.ProfileScreenDestination
+import com.example.buyerapp.presenter.home.view.StoreFilter
 import com.example.buyerapp.presenter.startAppDestination
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.annotation.Destination
@@ -28,32 +43,75 @@ import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 import com.example.buyerapp.presenter.destinations.Destination as HomeDestination
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Destination
 @Composable
-fun HomeScreen(navigator: NavigationProvider) {
+fun HomeScreen(
+    homeDestination: HomeTabsDestination,
+    viewModel: HomeViewModel = hiltViewModel(),
+    navigator: NavigationProvider
+) {
+
+    val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     val navController = rememberNavController()
 
-    Scaffold(
-        bottomBar = { MBottomNavigation(navController) }) {
-        NavigationGraph(
-            navController = navController,
-            navigator = navigator
-        )
+    LaunchedEffect(key1 = viewModel, block = {
+        viewModel.onTriggerEvent(HomeEvent.GetCachedStore)
+    })
+
+    if (uiState.isLoading) {
+        LoadingView()
+    } else {
+        BottomSheetScaffold(
+            sheetContent = {
+                uiState.state?.stores?.let { pageStores ->
+                    StoreFilter(pageStores, onSearchTextChanged = {
+                        viewModel.onTriggerEvent(HomeEvent.SearchStore(searchWord = it))
+                    }) { store ->
+                        viewModel.onTriggerEvent(HomeEvent.ChooseStore(store))
+                    }
+                }
+            },
+            sheetShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
+            sheetPeekHeight = if (uiState.state?.hasChosenStore == true) 0.dp else 700.dp
+
+        ) {
+            Scaffold(
+                bottomBar = { MBottomNavigation(navController) }) {
+                NavigationGraph(
+                    homeDestination,
+                    navController = navController,
+                    navigator = navigator
+                )
+            }
+        }
+    }
+
+    viewModel.effect.collectInLaunchedEffect { effect ->
+        when (effect) {
+            is BaseEffect.OnError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
+                .show()
+
+            is HomeEffect.ReOpenHome -> navigator.openHome(HomeTabsDestination.Main)
+        }
     }
 }
 
 @Composable
 fun NavigationGraph(
+    homeTabsDestination: HomeTabsDestination,
     navController: NavHostController,
     navigator: NavigationProvider
 ) {
     DestinationsNavHost(
+        startRoute = homeTabsDestination.direction,
         navController = navController,
         navGraph = NavGraphs.home,
         dependenciesContainerBuilder = {
             dependency(navigator)
+            dependency(HomeNavigationProviderImpl(navController))
         }
     )
 }
@@ -69,7 +127,7 @@ fun MBottomNavigation(navController: NavController) {
             navController.appCurrentDestinationAsState().value
                 ?: NavGraphs.home.startAppDestination
 
-        BottomBarDestination.values().forEach { destination ->
+        HomeTabsDestination.values().forEach { destination ->
             BottomNavigationItem(
                 icon = {
                     Icon(
@@ -91,7 +149,7 @@ fun MBottomNavigation(navController: NavController) {
     }
 }
 
-enum class BottomBarDestination(
+enum class HomeTabsDestination(
     val direction: DirectionDestinationSpec,
     val icon: Int,
     val label: String

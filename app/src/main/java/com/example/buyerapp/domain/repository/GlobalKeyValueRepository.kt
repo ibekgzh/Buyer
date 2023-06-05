@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface GlobalKeyValueRepository {
 
-    suspend fun putAuthKey(key: String);
+    suspend fun putAuthKey(key: String)
 
     suspend fun getAuthKey(): Flow<String?>
 

@@ -2,18 +2,20 @@ package com.example.buyerapp.application.navigation
 
 import androidx.navigation.NavController
 import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
-import com.example.buyerapp.presenter.destinations.BasketScreenDestination
+import com.example.buyerapp.presenter.destinations.CartScreenDestination
 import com.example.buyerapp.presenter.destinations.ConfirmOtpScreenDestination
-import com.example.buyerapp.presenter.destinations.DirectionDestination
 import com.example.buyerapp.presenter.destinations.HomeScreenDestination
 import com.example.buyerapp.presenter.destinations.InputCellPhoneScreenDestination
 import com.example.buyerapp.presenter.destinations.NewPinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.OnBoardingScreenDestination
+import com.example.buyerapp.presenter.destinations.OrderDetailsScreenDestination
 import com.example.buyerapp.presenter.destinations.OrderHistoryScreenDestination
 import com.example.buyerapp.presenter.destinations.PersonalInfoScreenDestination
 import com.example.buyerapp.presenter.destinations.PinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.ProductInfoScreenDestination
-import com.example.buyerapp.presenter.destinations.ShopScreenDestination
+import com.example.buyerapp.presenter.destinations.PromoScreenDestination
+import com.example.buyerapp.presenter.destinations.StoreScreenDestination
+import com.example.buyerapp.presenter.home.HomeTabsDestination
 import com.example.buyerapp.presenter.pincode.PinCodeScreenMode
 import com.ramcosta.composedestinations.navigation.navigate
 
@@ -23,7 +25,7 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigateUp()
     }
 
-    override fun navigateUp(destination: DirectionDestination) {
+    override fun navigateUp(destination: HomeScreenDestination) {
         navController.popBackStack(destination.route, false)
     }
 
@@ -55,9 +57,9 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(NewPinCodeScreenDestination(confirmOtpType, smsToken, cellphone))
     }
 
-    override fun openHome() {
+    override fun openHome(homeTabsDestination: HomeTabsDestination) {
         navController.navigate(
-            HomeScreenDestination
+            HomeScreenDestination(homeTabsDestination)
         ) {
             popUpTo(navController.graph.id)
         }
@@ -71,16 +73,24 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(ProductInfoScreenDestination(barcode))
     }
 
-    override fun openBasket() {
-        navController.navigate(BasketScreenDestination)
+    override fun openCart() {
+        navController.navigate(CartScreenDestination)
     }
 
-    override fun openShop() {
-        navController.navigate(ShopScreenDestination)
+    override fun openStore(id: Int) {
+        navController.navigate(StoreScreenDestination(id))
     }
 
     override fun openOrderHistory() {
         navController.navigate(OrderHistoryScreenDestination)
+    }
+
+    override fun openOrderDetails(id: Long) {
+        navController.navigate(OrderDetailsScreenDestination(id))
+    }
+
+    override fun openPromos(storeId: Int) {
+        navController.navigate(PromoScreenDestination(storeId))
     }
 
 }

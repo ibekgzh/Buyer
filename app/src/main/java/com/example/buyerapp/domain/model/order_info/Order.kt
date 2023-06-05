@@ -1,11 +1,9 @@
 package com.example.buyerapp.domain.model.order_info
 
-import java.util.Date
-
 data class Order(
     val id: Long,
     val price: Int,
-    val regDate: Date,
+    val regDate: String,
     val state: State,
     val store: Store
 )

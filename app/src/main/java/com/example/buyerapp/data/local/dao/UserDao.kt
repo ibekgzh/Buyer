@@ -9,4 +9,7 @@ import com.example.buyerapp.data.local.entity.UserEntity
 interface UserDao : BaseDao<UserEntity> {
     @Query("SELECT * FROM ${UserEntity.TABLE_NAME}")
     suspend fun getUser(): UserEntity?
+
+    @Query("DELETE FROM ${UserEntity.TABLE_NAME}")
+    suspend fun deleteAll()
 }
