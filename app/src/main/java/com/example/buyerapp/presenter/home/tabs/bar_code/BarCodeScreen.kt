@@ -1,5 +1,6 @@
 package com.example.buyerapp.presenter.home.tabs.bar_code
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -71,19 +72,21 @@ fun BarCodeScreen(navigator: NavigationProvider) {
                         isBarCode = true
                         isNfc = false
 
-                        navigator.openProductInfo("4485149620101")
-//                        scanner.startScan().addOnSuccessListener {
-//                            isNfc = false
-//                            isBarCode = false
-//                            it.rawValue?.let { it1 ->
-//                                navigator.openProductInfo(it1)
-//                            }
-//                                ?: Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT)
-//                                    .show()
-//                        }.addOnCanceledListener {
-//                            isNfc = false
-//                            isBarCode = false
-//                        }
+//                        navigator.openProductInfo("4485149620101")
+                        scanner.startScan().addOnSuccessListener {
+                            isNfc = false
+                            isBarCode = false
+                            it.rawValue?.let { it1 ->
+                                Toast.makeText(context, it1, Toast.LENGTH_SHORT)
+                                    .show()
+                                navigator.openProductInfo(it1)
+                            }
+                                ?: Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT)
+                                    .show()
+                        }.addOnCanceledListener {
+                            isNfc = false
+                            isBarCode = false
+                        }
                     },
                     modifier = Modifier
                         .height(52.dp)

@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -47,6 +48,7 @@ fun Features(store: Store, onClickShop: () -> Unit, onClickPromos: () -> Unit, o
             Column(
                 modifier = Modifier
                     .size(160.dp)
+                    .weight(1f)
                     .fillMaxWidth()
                     .clip(shape = RoundedCornerShape(20.dp))
                     .background(colorResource(id = R.color.shop_background))
@@ -74,9 +76,12 @@ fun Features(store: Store, onClickShop: () -> Unit, onClickPromos: () -> Unit, o
                 }
             }
 
+            Spacer(modifier = Modifier.weight(0.1f))
+
             Column(
                 modifier = Modifier
                     .size(160.dp)
+                    .weight(1f)
                     .fillMaxWidth()
                     .clip(shape = RoundedCornerShape(20.dp))
                     .background(colorResource(id = R.color.discount_background))

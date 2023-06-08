@@ -21,10 +21,6 @@ import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
 import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.core.widget.SurfaceTopToolBarBack
-import com.example.buyerapp.presenter.home.view.StoreFilter
-import com.example.buyerapp.presenter.order.history.OrderHistoryEvent
-import com.example.buyerapp.presenter.order.history.view.BottomSheetFilter
-import com.example.buyerapp.presenter.promo.view.PromoFilters
 import com.example.buyerapp.presenter.promo.view.PromoItems
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
@@ -37,7 +33,6 @@ fun PromoScreen(
     viewModel: PromoViewModel = hiltViewModel(),
     navigator: NavigationProvider
 ) {
-
 
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -77,9 +72,7 @@ fun PromoScreen(
                     sheetState = bottomSheetScaffoldState,
                     sheetShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
                     sheetContent = {
-                        StoreFilter(
 
-                        )
                     }
                 ) {
                     LazyColumn {
