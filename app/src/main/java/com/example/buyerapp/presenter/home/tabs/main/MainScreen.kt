@@ -58,6 +58,9 @@ fun MainScreen(
                 },
                 onClickChooseShop = {
                     viewModel.onTriggerEvent(MainEvent.SelectShop)
+                },
+                onClickNotify = {
+                    navigator.openLastNotificationsOfStores()
                 }
             )
             Column(

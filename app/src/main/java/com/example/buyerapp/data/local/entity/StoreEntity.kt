@@ -8,7 +8,7 @@ import com.example.buyerapp.domain.model.Store
 @Entity(tableName = StoreEntity.TABLE_NAME)
 data class StoreEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = COLUMN_ID)  val id: Int,
+    @ColumnInfo(name = COLUMN_ID)  val id: Long,
     @ColumnInfo(name = COLUMN_TITLE)  val title: String,
     @ColumnInfo(name = COLUMN_DESCR)  val descr: String,
     @ColumnInfo(name = COLUMN_COLOR)  val color: String

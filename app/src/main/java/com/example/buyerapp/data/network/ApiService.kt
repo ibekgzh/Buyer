@@ -14,6 +14,7 @@ import com.example.buyerapp.data.network.dto.auth.AuthStartReq
 import com.example.buyerapp.data.network.dto.auth.PinChangeReq
 import com.example.buyerapp.data.network.dto.auth.PinCheckReq
 import com.example.buyerapp.data.network.dto.auth.PinResetConfirmReq
+import com.example.buyerapp.data.network.dto.fcm.LastNotificationOfStoreRes
 import com.example.buyerapp.data.network.dto.order_info.OrderCreateReq
 import com.example.buyerapp.data.network.dto.order_info.OrderCreateRes
 import com.example.buyerapp.data.network.dto.order_info.OrderDetailsRes
@@ -105,13 +106,13 @@ interface ApiService {
     suspend fun orderDetails(@Path("id") id: Long): OrderDetailsRes
 
     @GET("store/{id}")
-    suspend fun getStoreDetails(@Path("id") id: Int): StoreDetailsRes
+    suspend fun getStoreDetails(@Path("id") id: Long): StoreDetailsRes
 
     @GET("promotion")
     suspend fun getPromotion(
         @Query("pageNum") pageNum: Int,
         @Query("pageSize") pageSize: Int,
-        @Query("storeId") storeId: Int
+        @Query("storeId") storeId: Long
     ): PageableContent<PromoRes>
 
     @GET("store/search")
@@ -123,4 +124,14 @@ interface ApiService {
 
     @POST("store/notification/state")
     suspend fun storeNotifyState(@Body storeNotifyStateReq: StoreNotifyStateReq)
+
+    @GET("/fcm/notification/stores/last")
+    suspend fun getLastNotificationsOfStores(): List<LastNotificationOfStoreRes>
+
+    @GET("/fcm/notification/filter")
+    suspend fun getNotificationFilter(
+        @Query("storeId") storeId: Long,
+        @Query("pageNum") pageNum: Int,
+        @Query("pageSize") pageSize: Int
+    ): PageableContent<LastNotificationOfStoreRes>
 }

@@ -5,7 +5,7 @@ import com.example.buyerapp.domain.model.Cart
 data class OrderCreateReq(
     val items: List<OrderItemReq>,
     val paymentTypeId: Int,
-    val storeId: Int,
+    val storeId: Long,
     val totalPrice: Int
 )
 

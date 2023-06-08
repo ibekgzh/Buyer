@@ -3,6 +3,7 @@ package com.example.buyerapp.domain.di
 import com.example.buyerapp.domain.repository.AuthBuyerRepository
 import com.example.buyerapp.domain.repository.CartRepository
 import com.example.buyerapp.domain.repository.GlobalKeyValueRepository
+import com.example.buyerapp.domain.repository.NotificationRepository
 import com.example.buyerapp.domain.repository.OnBoardingRepository
 import com.example.buyerapp.domain.repository.OrderRepository
 import com.example.buyerapp.domain.repository.ProductRepository
@@ -24,6 +25,8 @@ import com.example.buyerapp.domain.usecase.GetProductByBarCodeUseCase
 import com.example.buyerapp.domain.usecase.GetPromotionsUseCase
 import com.example.buyerapp.domain.usecase.GetSearchStoreUseCase
 import com.example.buyerapp.domain.usecase.GetCachedStoreUseCase
+import com.example.buyerapp.domain.usecase.GetFilteredNotificationsUseCase
+import com.example.buyerapp.domain.usecase.GetLastNotificationsOfStoresUseCase
 import com.example.buyerapp.domain.usecase.GetStoreDetailsUseCase
 import com.example.buyerapp.domain.usecase.GetUserInfoUseCase
 import com.example.buyerapp.domain.usecase.ModifyCartItemUseCase
@@ -174,4 +177,14 @@ class UseCaseModule {
     @Provides
     fun provideStoreNotifyStateUseCase(storeRepository: StoreRepository): StoreNotifyStateUseCase =
         StoreNotifyStateUseCase(storeRepository)
+
+    @Singleton
+    @Provides
+    fun provideGetLastNotificationsOfStoresUseCase(notificationRepository: NotificationRepository): GetLastNotificationsOfStoresUseCase =
+        GetLastNotificationsOfStoresUseCase(notificationRepository)
+
+    @Singleton
+    @Provides
+    fun provideGetFilteredNotificationsUseCase(notificationRepository: NotificationRepository): GetFilteredNotificationsUseCase =
+        GetFilteredNotificationsUseCase(notificationRepository)
 }

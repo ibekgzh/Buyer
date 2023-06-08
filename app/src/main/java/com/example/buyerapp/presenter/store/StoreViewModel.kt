@@ -23,7 +23,7 @@ class StoreViewModel @Inject constructor(
         }
     }
 
-    private fun onLoadDetails(id: Int) = safeLaunch {
+    private fun onLoadDetails(id: Long) = safeLaunch {
         execute(getStoreDetailsUseCase(id)) {
             setState(StoreViewState(storeDetails = it))
         }
@@ -35,7 +35,7 @@ class StoreViewModel @Inject constructor(
         }
     }
 
-    private fun onChangeNotifyState(active: Boolean, storeId: Int) = safeLaunch {
+    private fun onChangeNotifyState(active: Boolean, storeId: Long) = safeLaunch {
         execute(storeNotifyStateUseCase(StoreNotifyStateUseCase.Params(active, storeId))) {
             setState(StoreViewState(storeDetails = it))
         }

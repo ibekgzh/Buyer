@@ -9,6 +9,6 @@ interface StoreRepository {
     suspend fun saveStore(store: Store)
     suspend fun getStore(): Store?
     suspend fun deleteStore()
-    suspend fun getStoreDetails(id: Int): StoreDetails
-    suspend fun storeNotifyState(active: Boolean, storeId: Int)
+    suspend fun getStoreDetails(id: Long): StoreDetails
+    suspend fun storeNotifyState(active: Boolean, storeId: Long)
 }

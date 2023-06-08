@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.FlowCollector
 import javax.inject.Inject
 
 class GetStoreDetailsUseCase @Inject constructor(private val storeRepository: StoreRepository):
-    DataStateUseCase<Int, StoreDetails>() {
-    override suspend fun FlowCollector<DataState<StoreDetails>>.execute(params: Int) {
+    DataStateUseCase<Long, StoreDetails>() {
+    override suspend fun FlowCollector<DataState<StoreDetails>>.execute(params: Long) {
         val result = apiCall {
             storeRepository.getStoreDetails(params)
         }

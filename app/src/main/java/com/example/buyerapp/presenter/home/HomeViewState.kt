@@ -1,5 +1,6 @@
 package com.example.buyerapp.presenter.home
 
+import com.example.buyerapp.core.constants.StandardPageSize
 import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.domain.model.Pageable
 import com.example.buyerapp.domain.model.Store
@@ -24,5 +25,3 @@ sealed class HomeEffect : BaseEffect() {
     object ReOpenHome : HomeEffect()
 }
 
-
-const val StandardPageSize = 20

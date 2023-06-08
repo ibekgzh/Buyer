@@ -12,7 +12,7 @@ import javax.inject.Inject
 class GetPromotionsUseCase @Inject constructor(private val promoRepository: PromoRepository):
 DataStateUseCase<GetPromotionsUseCase.Params, Pageable<Promo>>(){
     data class Params(
-        val storeId: Int,
+        val storeId: Long,
         val page: Int,
         val pageSize: Int
     )

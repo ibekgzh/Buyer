@@ -26,10 +26,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
-import com.example.buyerapp.domain.model.Store
 
 @Composable
-fun Header(storeTitle: String, onClickCart: () -> Unit, onClickChooseShop: () -> Unit) {
+fun Header(storeTitle: String, onClickCart: () -> Unit, onClickChooseShop: () -> Unit, onClickNotify: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -70,7 +69,7 @@ fun Header(storeTitle: String, onClickCart: () -> Unit, onClickChooseShop: () ->
                 Modifier
                     .size(50.dp)
                     .clip(shape = RoundedCornerShape(20.dp))
-                    .clickable { },
+                    .clickable { onClickNotify() },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

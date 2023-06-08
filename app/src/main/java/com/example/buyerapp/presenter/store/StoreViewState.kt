@@ -8,9 +8,9 @@ data class StoreViewState(
 )
 
 sealed class StoreEvent {
-    data class LoadDetails(val id: Int) : StoreEvent()
+    data class LoadDetails(val id: Long) : StoreEvent()
     object ChooseStore : StoreEvent()
-    data class ChangeNotifyState(val active: Boolean, val storeId: Int) : StoreEvent()
+    data class ChangeNotifyState(val active: Boolean, val storeId: Long) : StoreEvent()
 }
 
 sealed class StoreEffect : BaseEffect() {

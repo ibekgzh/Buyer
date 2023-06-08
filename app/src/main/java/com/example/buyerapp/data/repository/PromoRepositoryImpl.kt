@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class PromoRepositoryImpl @Inject constructor(private val apiService: ApiService) :
     PromoRepository {
-    override suspend fun getPromotions(storeId: Int, pageNum: Int, pageSize: Int): Pageable<Promo> {
+    override suspend fun getPromotions(storeId: Long, pageNum: Int, pageSize: Int): Pageable<Promo> {
         return apiService.getPromotion(pageNum, pageSize, storeId).toDomain()
     }
 }

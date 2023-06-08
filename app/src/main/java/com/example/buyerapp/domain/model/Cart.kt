@@ -23,7 +23,7 @@ data class Item(
 )
 
 data class Store(
-    val id: Int,
+    val id: Long,
     val title: String,
     val logo: String,
     val color: String

@@ -1,8 +1,6 @@
 package com.example.buyerapp.data.repository
 
-import com.example.buyerapp.core.framework.extension.classTag
 import com.example.buyerapp.data.local.dao.StoreDao
-import com.example.buyerapp.data.local.entity.StoreEntity
 import com.example.buyerapp.data.local.entity.toDomain
 import com.example.buyerapp.data.local.entity.toEntity
 import com.example.buyerapp.data.network.ApiService
@@ -35,11 +33,11 @@ class StoreRepositoryImpl @Inject constructor(
         storeDao.deleteAll()
     }
 
-    override suspend fun getStoreDetails(id: Int): StoreDetails {
+    override suspend fun getStoreDetails(id: Long): StoreDetails {
         return apiService.getStoreDetails(id).toDomain()
     }
 
-    override suspend fun storeNotifyState(active: Boolean, storeId: Int) {
+    override suspend fun storeNotifyState(active: Boolean, storeId: Long) {
         return apiService.storeNotifyState(StoreNotifyStateReq(active, storeId))
     }
 }

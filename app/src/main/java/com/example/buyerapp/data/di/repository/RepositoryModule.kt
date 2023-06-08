@@ -7,6 +7,7 @@ import com.example.buyerapp.data.network.ApiService
 import com.example.buyerapp.data.repository.AuthBuyerRepositoryImpl
 import com.example.buyerapp.data.repository.CartRepositoryImpl
 import com.example.buyerapp.data.repository.GlobalKeyValueRepositoryImpl
+import com.example.buyerapp.data.repository.NotificationRepositoryImpl
 import com.example.buyerapp.data.repository.OnBoardingRepositoryImpl
 import com.example.buyerapp.data.repository.OrderRepositoryImpl
 import com.example.buyerapp.data.repository.ProductRepositoryImpl
@@ -16,6 +17,7 @@ import com.example.buyerapp.data.repository.UserRepositoryImpl
 import com.example.buyerapp.domain.repository.AuthBuyerRepository
 import com.example.buyerapp.domain.repository.CartRepository
 import com.example.buyerapp.domain.repository.GlobalKeyValueRepository
+import com.example.buyerapp.domain.repository.NotificationRepository
 import com.example.buyerapp.domain.repository.OnBoardingRepository
 import com.example.buyerapp.domain.repository.OrderRepository
 import com.example.buyerapp.domain.repository.ProductRepository
@@ -76,4 +78,9 @@ class RepositoryModule {
     @Provides
     fun provideStoreRepository(apiService: ApiService, storeDao: StoreDao): StoreRepository =
         StoreRepositoryImpl(apiService, storeDao)
+
+    @Singleton
+    @Provides
+    fun provideNotificationRepository(apiService: ApiService): NotificationRepository =
+        NotificationRepositoryImpl(apiService)
 }

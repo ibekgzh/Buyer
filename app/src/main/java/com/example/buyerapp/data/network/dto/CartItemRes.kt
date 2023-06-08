@@ -40,7 +40,7 @@ fun ItemRes.toDomain() =
     Item(id, title, measureUnit.toDomain(), price/100, description, barcode, uid)
 
 data class StoreRes(
-    val id: Int,
+    val id: Long,
     val title: String,
     val logo: String,
     val color: String

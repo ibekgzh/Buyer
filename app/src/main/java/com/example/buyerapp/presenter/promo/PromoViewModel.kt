@@ -22,7 +22,7 @@ class PromoViewModel @Inject constructor(
         }
     }
 
-    private fun onLoadPromos(storeId: Int, page: Int, pageSize: Int) = safeLaunch {
+    private fun onLoadPromos(storeId: Long, page: Int, pageSize: Int) = safeLaunch {
         execute(getPromotionsUseCase(GetPromotionsUseCase.Params(storeId, page, pageSize))) {
             setState(PromoViewState(promos = it))
         }

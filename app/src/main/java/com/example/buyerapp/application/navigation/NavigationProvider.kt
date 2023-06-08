@@ -33,11 +33,15 @@ interface NavigationProvider {
 
     fun openCart()
 
-    fun openStore(id: Int)
+    fun openStore(id: Long)
 
     fun openOrderHistory()
 
     fun openOrderDetails(id: Long)
 
-    fun openPromos(storeId: Int)
+    fun openPromos(storeId: Long)
+
+    fun openLastNotificationsOfStores()
+
+    fun openFilteredNotifications(storeId: Long)
 }

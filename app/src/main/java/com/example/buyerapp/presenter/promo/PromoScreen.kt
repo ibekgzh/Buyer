@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 @Destination
 @Composable
 fun PromoScreen(
-    storeId: Int,
+    storeId: Long,
     viewModel: PromoViewModel = hiltViewModel(),
     navigator: NavigationProvider
 ) {

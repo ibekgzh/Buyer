@@ -1,6 +1,8 @@
-package com.example.buyerapp.presenter.store
+package com.example.buyerapp.presenter.notify
 
 import android.widget.Toast
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -12,15 +14,13 @@ import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
 import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.core.widget.SurfaceTopToolBarBack
-import com.example.buyerapp.presenter.home.HomeTabsDestination
-import com.example.buyerapp.presenter.store.view.StoreScreenContent
+import com.example.buyerapp.presenter.notify.view.LastNotificationOfStoreItem
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
 @Composable
-fun StoreScreen(
-    id: Long,
-    viewModel: StoreViewModel = hiltViewModel(),
+fun LastNotificationsOfStoresScreen(
+    viewModel: LastNotificationsOfStoresViewModel = hiltViewModel(),
     navigator: NavigationProvider
 ) {
 
@@ -28,29 +28,28 @@ fun StoreScreen(
     val context = LocalContext.current
 
     LaunchedEffect(key1 = viewModel, block = {
-        viewModel.onTriggerEvent(StoreEvent.LoadDetails(id))
+        viewModel.onTriggerEvent(LastNotificationsOfStoresEvent.LoadNotifications)
     })
 
     if (uiState.isLoading) {
         LoadingView()
     } else {
-        uiState.state?.let {
+        uiState.state?.let { state ->
             SurfaceTopToolBarBack(
+                title = "Уведомление",
                 onOnclickBackButton = { navigator.navigateUp() }
             ) {
-                StoreScreenContent(
-                    it.storeDetails,
-                    onChangedStore = {
-                        viewModel.onTriggerEvent(StoreEvent.ChooseStore)
-                    },
-                    onClickBarCode = {
-                        navigator.openHome(HomeTabsDestination.Barcode)
-                    },
-                    onCheckedNotify = {
-                        viewModel.onTriggerEvent(StoreEvent.ChangeNotifyState(it, id))
-                    },
-                    viewModel.imageLoader
-                )
+                LazyColumn {
+                    items(state.notifications) {
+                        LastNotificationOfStoreItem(
+                            lastNotificationOfStore = it,
+                            onClickItem = {
+                                navigator.openFilteredNotifications(it.id)
+                            },
+                            imageLoader = viewModel.imageLoader
+                        )
+                    }
+                }
             }
         }
     }
@@ -59,8 +58,6 @@ fun StoreScreen(
         when (effect) {
             is BaseEffect.OnError -> Toast.makeText(context, effect.message, Toast.LENGTH_SHORT)
                 .show()
-
-            is StoreEffect.OpenHome -> navigator.openHome(HomeTabsDestination.Main)
         }
     }
 }

@@ -7,7 +7,7 @@ import com.example.buyerapp.domain.model.store.StoreDetails
 
 data class StoreRes(
     val color: String,
-    val id: Int,
+    val id: Long,
     val logo: String,
     val title: String
 )

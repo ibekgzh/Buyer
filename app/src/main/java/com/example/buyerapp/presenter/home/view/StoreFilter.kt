@@ -50,7 +50,7 @@ fun StoreFilter(
 
     val shopName = remember { mutableStateOf(TextFieldValue("")) }
 
-    val selected = remember { mutableStateOf(0) }
+    val selected = remember { mutableStateOf(0L) }
 
     val context = LocalContext.current
 
@@ -148,7 +148,7 @@ fun StoreFilter(
 
         Button(
             onClick = {
-                if (selected.value == 0) {
+                if (selected.value == 0L) {
                     Toast.makeText(context, "Не выбран магазин", Toast.LENGTH_SHORT).show()
                 } else {
                     onChooseShop(stores.data.first { t -> t.id == selected.value })

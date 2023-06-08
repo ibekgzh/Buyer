@@ -13,7 +13,7 @@ class StoreNotifyStateUseCase @Inject constructor(private val storeRepository: S
 
     data class Params (
         val active: Boolean,
-        val storeId: Int
+        val storeId: Long
     )
 
     override suspend fun FlowCollector<DataState<StoreDetails>>.execute(params: Params) {

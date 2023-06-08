@@ -4,5 +4,5 @@ import com.example.buyerapp.domain.model.Pageable
 import com.example.buyerapp.domain.model.promo.Promo
 
 interface PromoRepository {
-    suspend fun getPromotions(storeId: Int, pageNum: Int, pageSize: Int): Pageable<Promo>
+    suspend fun getPromotions(storeId: Long, pageNum: Int, pageSize: Int): Pageable<Promo>
 }

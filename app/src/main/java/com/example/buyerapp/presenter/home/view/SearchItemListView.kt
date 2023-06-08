@@ -21,7 +21,7 @@ import com.example.buyerapp.domain.model.Store
 @Composable
 fun SearchItemListView(
     store: Store, selected: Boolean,
-    onSelected: (storeId: Int) -> Unit
+    onSelected: (storeId: Long) -> Unit
 ) {
 
     Column(modifier = Modifier

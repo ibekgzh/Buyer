@@ -4,8 +4,10 @@ import androidx.navigation.NavController
 import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
 import com.example.buyerapp.presenter.destinations.CartScreenDestination
 import com.example.buyerapp.presenter.destinations.ConfirmOtpScreenDestination
+import com.example.buyerapp.presenter.destinations.FilteredNotificationsScreenDestination
 import com.example.buyerapp.presenter.destinations.HomeScreenDestination
 import com.example.buyerapp.presenter.destinations.InputCellPhoneScreenDestination
+import com.example.buyerapp.presenter.destinations.LastNotificationsOfStoresScreenDestination
 import com.example.buyerapp.presenter.destinations.NewPinCodeScreenDestination
 import com.example.buyerapp.presenter.destinations.OnBoardingScreenDestination
 import com.example.buyerapp.presenter.destinations.OrderDetailsScreenDestination
@@ -77,7 +79,7 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(CartScreenDestination)
     }
 
-    override fun openStore(id: Int) {
+    override fun openStore(id: Long) {
         navController.navigate(StoreScreenDestination(id))
     }
 
@@ -89,8 +91,15 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(OrderDetailsScreenDestination(id))
     }
 
-    override fun openPromos(storeId: Int) {
+    override fun openPromos(storeId: Long) {
         navController.navigate(PromoScreenDestination(storeId))
     }
 
+    override fun openLastNotificationsOfStores() {
+        navController.navigate(LastNotificationsOfStoresScreenDestination)
+    }
+
+    override fun openFilteredNotifications(storeId: Long) {
+        navController.navigate(FilteredNotificationsScreenDestination(storeId))
+    }
 }
