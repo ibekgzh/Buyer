@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -55,7 +56,8 @@ fun OrderItem(
             ) {
                 Image(
                     modifier = Modifier.size(50.dp),
-                    painter = painter, contentDescription = order.id.toString(),
+                    painter = painterResource(id = R.drawable.order),
+                    contentDescription = order.id.toString(),
                     contentScale = ContentScale.Crop,
                 )
                 Column(modifier = Modifier.padding(start = 18.dp)) {
@@ -66,7 +68,7 @@ fun OrderItem(
                         fontWeight = FontWeight.W600,
                         fontSize = 16.sp,
                         lineHeight = 30.sp,
-                        color = order.store.color.toColor(),
+                        color = colorResource(id = R.color.black2),
                     )
                     Text(
                         order.state.descr,

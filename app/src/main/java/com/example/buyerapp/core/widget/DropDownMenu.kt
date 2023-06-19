@@ -18,6 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,6 +52,13 @@ fun DropDownMenu(list: Array<String>) {
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
             ),
+            textStyle = TextStyle(
+                fontFamily = FontFamily.Default,
+                fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.W600,
+                fontSize = 13.sp,
+                lineHeight = 20.sp,
+                color = Color.Black)
         )
 
         ExposedDropdownMenu(
@@ -55,7 +67,15 @@ fun DropDownMenu(list: Array<String>) {
         ) {
             list.forEach { item ->
                 DropdownMenuItem(
-                    text = { Text(text = item) },
+                    text = {
+                        Text(text = item,
+                            fontFamily = FontFamily.Default,
+                            fontStyle = FontStyle.Normal,
+                            fontWeight = FontWeight.W600,
+                            fontSize = 13.sp,
+                            lineHeight = 20.sp,
+                            color = Color.Black)
+                    },
                     onClick = {
                         selectedText = item
                         expanded = false

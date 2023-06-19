@@ -1,5 +1,6 @@
 package com.example.buyerapp.presenter.home.tabs.bar_code
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -35,6 +36,8 @@ import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
 import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.application.navigation.graph.HomeNavGraph
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.ramcosta.composedestinations.annotation.Destination
 
@@ -45,7 +48,13 @@ fun BarCodeScreen(navigator: NavigationProvider) {
 
     val context = LocalContext.current
 
-    val scanner = GmsBarcodeScanning.getClient(context)
+    val options = GmsBarcodeScannerOptions.Builder()
+        .setBarcodeFormats(
+            Barcode.FORMAT_QR_CODE,
+            Barcode.FORMAT_AZTEC)
+        .build()
+
+    val scanner = GmsBarcodeScanning.getClient(context, options)
 
     var isBarCode by rememberSaveable { mutableStateOf(false) }
     var isNfc by rememberSaveable { mutableStateOf(false) }
@@ -86,6 +95,8 @@ fun BarCodeScreen(navigator: NavigationProvider) {
                         }.addOnCanceledListener {
                             isNfc = false
                             isBarCode = false
+                        }.addOnFailureListener {
+                            Log.d("it", it.stackTraceToString());
                         }
                     },
                     modifier = Modifier

@@ -27,7 +27,6 @@ import com.example.buyerapp.presenter.home.tabs.main.view.Header
 import com.example.buyerapp.presenter.home.tabs.main.view.MainCard
 import com.ramcosta.composedestinations.annotation.Destination
 
-
 @HomeNavGraph(start = true)
 @Destination(start = true)
 @Composable
@@ -47,39 +46,40 @@ fun MainScreen(
     uiState.state?.store?.let { store ->
         Column(
             modifier = Modifier
-                .padding(20.dp)
                 .fillMaxSize()
                 .background(Color.White)
         ) {
-            Header(
-                storeTitle = store.title,
-                onClickCart = {
-                    navigator.openCart()
-                },
-                onClickChooseShop = {
-                    viewModel.onTriggerEvent(MainEvent.SelectShop)
-                },
-                onClickNotify = {
-                    navigator.openLastNotificationsOfStores()
+            Column(modifier = Modifier.padding(20.dp)) {
+                Header(
+                    storeTitle = store.title,
+                    onClickCart = {
+                        navigator.openCart()
+                    },
+                    onClickChooseShop = {
+                        viewModel.onTriggerEvent(MainEvent.SelectShop)
+                    },
+                    onClickNotify = {
+                        navigator.openLastNotificationsOfStores()
+                    }
+                )
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    MainCard(
+                        onClickBarCode = {
+                            homeNavigator.openBarCode()
+                        }
+                    )
+                    Features(
+                        store = store,
+                        onClickShop = { navigator.openStore(store.id) },
+                        onClickPromos = { navigator.openPromos(store.id) },
+                        onClickOrderHistory = {
+                            navigator.openOrderHistory()
+                        }
+                    )
                 }
-            )
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-            ) {
-                MainCard(
-                    onClickBarCode = {
-                        homeNavigator.openBarCode()
-                    }
-                )
-                Features(
-                    store = store,
-                    onClickShop = { navigator.openStore(store.id) },
-                    onClickPromos = { navigator.openPromos(store.id) },
-                    onClickOrderHistory = {
-                        navigator.openOrderHistory()
-                    }
-                )
             }
         }
     }

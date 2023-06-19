@@ -154,7 +154,7 @@ fun ItemsPager(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 90.dp)
+                .padding(bottom = 60.dp)
                 .align(Alignment.BottomCenter),
             horizontalArrangement = Arrangement.Center
         ) {

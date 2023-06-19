@@ -53,7 +53,7 @@ fun NewPinCodeContent(
         )
 
         Text(
-            text = "Установите 4-значный пинкод, который будет использоваться для входа в приложения",
+            text = "Установите 4-значный пинкод, который будет использоваться для входа в приложение",
             fontFamily = FontFamily.Default,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.W300,

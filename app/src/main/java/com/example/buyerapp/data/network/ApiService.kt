@@ -125,10 +125,10 @@ interface ApiService {
     @POST("store/notification/state")
     suspend fun storeNotifyState(@Body storeNotifyStateReq: StoreNotifyStateReq)
 
-    @GET("/fcm/notification/stores/last")
+    @GET("fcm/notification/stores/last")
     suspend fun getLastNotificationsOfStores(): List<LastNotificationOfStoreRes>
 
-    @GET("/fcm/notification/filter")
+    @GET("fcm/notification/filter")
     suspend fun getNotificationFilter(
         @Query("storeId") storeId: Long,
         @Query("pageNum") pageNum: Int,

@@ -54,7 +54,7 @@ fun PinCodeView(
         content = {
 
             Text(
-                text =  title,
+                text = title,
                 fontFamily = FontFamily.Default,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.W500,
@@ -96,6 +96,7 @@ fun PinCodeView(
                 color = colorResource(id = R.color.black2),
                 modifier = Modifier
                     .align(alignment = Alignment.CenterHorizontally)
+                    .padding(top = 10.dp)
                     .clickable {
                         onForgetPinClick()
                     }
@@ -141,7 +142,7 @@ fun Digits(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(0.dp, 30.dp, 0.dp, 0.dp),
+                .padding(top = 20.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             for (indexB in indexA) {

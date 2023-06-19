@@ -27,7 +27,7 @@ import com.example.buyerapp.domain.model.promo.Promo
 @Composable
 fun PromoItems(promo: Promo, imageLoader: ImageLoader, onClick: () -> Unit) {
 
-    val painter = rememberAsyncImagePainter(promo.url, imageLoader)
+    val painter = rememberAsyncImagePainter(promo.storeRes.logo, imageLoader)
 
     Row(modifier = Modifier
         .fillMaxWidth()
@@ -37,14 +37,15 @@ fun PromoItems(promo: Promo, imageLoader: ImageLoader, onClick: () -> Unit) {
         }) {
         Image(
             painter = painter,
-            contentDescription = promo.url,
+            contentDescription = promo.storeRes.logo,
             modifier = Modifier
-                .size(50.dp)
+                .size(60.dp)
                 .padding(end = 20.dp)
         )
+
         Column (modifier = Modifier.align(Alignment.CenterVertically)){
             Text(
-                text = promo.title,
+                text = promo.title + " • " + promo.endDate,
                 fontFamily = FontFamily.Default,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.W600,
@@ -59,7 +60,7 @@ fun PromoItems(promo: Promo, imageLoader: ImageLoader, onClick: () -> Unit) {
                 fontWeight = FontWeight.W600,
                 fontSize = 16.sp,
                 lineHeight = 30.sp,
-                color = "#979797".toColor()
+                color = "#111111".toColor()
             )
         }
     }

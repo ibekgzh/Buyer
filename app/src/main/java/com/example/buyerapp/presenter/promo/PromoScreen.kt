@@ -21,6 +21,7 @@ import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
 import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.core.widget.SurfaceTopToolBarBack
+import com.example.buyerapp.presenter.home.tabs.main.MainEvent
 import com.example.buyerapp.presenter.promo.view.PromoItems
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
@@ -46,15 +47,15 @@ fun PromoScreen(
         viewModel.onTriggerEvent(PromoEvent.LoadPromos(storeId))
     })
 
-    val showHideBottomSheet: () -> Unit = {
-        coroutineScope.launch {
-            if (bottomSheetScaffoldState.isVisible) {
-                bottomSheetScaffoldState.hide()
-            } else {
-                bottomSheetScaffoldState.show()
-            }
-        }
-    }
+//    val showHideBottomSheet: () -> Unit = {
+//        coroutineScope.launch {
+//            if (bottomSheetScaffoldState.isVisible) {
+//                bottomSheetScaffoldState.hide()
+//            } else {
+//                bottomSheetScaffoldState.show()
+//            }
+//        }
+//    }
 
     if (uiState.isLoading) {
         LoadingView()
@@ -65,7 +66,9 @@ fun PromoScreen(
                 title = "Скидки",
                 onShowCommonButton = true,
                 onClickCommonButton = {
-                    showHideBottomSheet()
+//                    showHideBottomSheet()
+
+//                    viewModel.onTriggerEvent(PromoEvent.SelectShop)
                 }
             ) {
                 ModalBottomSheetLayout(

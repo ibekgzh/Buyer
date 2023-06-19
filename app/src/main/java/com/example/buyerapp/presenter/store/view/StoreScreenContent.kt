@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -66,9 +67,9 @@ fun StoreScreenContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
-                        .background(Color.LightGray)
+                        .background(Color.White)
                         .clip(shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
-                        .paint(largeLogo)
+                        .paint(largeLogo, contentScale = ContentScale.Crop)
                 )
                 Box(
                     modifier = Modifier
