@@ -34,7 +34,7 @@ fun OrderItem(
     onSelectItem: (order: Order) -> Unit
 ) {
 
-    val painter = rememberAsyncImagePainter(order.store.logo, imageLoader)
+//    val painter = rememberAsyncImagePainter(order.store.logo, imageLoader)
 
     Column(
         modifier = Modifier
