@@ -44,7 +44,9 @@ fun LastNotificationsOfStoresScreen(
                         LastNotificationOfStoreItem(
                             lastNotificationOfStore = it,
                             onClickItem = {
-                                navigator.openFilteredNotifications(it.id)
+                                it.store?.let { store ->
+                                    navigator.openFilteredNotifications(store.id)
+                                }
                             },
                             imageLoader = viewModel.imageLoader
                         )

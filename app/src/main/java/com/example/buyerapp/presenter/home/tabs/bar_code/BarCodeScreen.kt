@@ -1,6 +1,6 @@
 package com.example.buyerapp.presenter.home.tabs.bar_code
 
-import android.util.Log
+import android.Manifest
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -36,11 +36,12 @@ import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
 import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.application.navigation.graph.HomeNavGraph
-import com.google.mlkit.vision.barcode.common.Barcode
-import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
-import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
+import com.example.buyerapp.core.widget.barcode.BarCodePreview
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 import com.ramcosta.composedestinations.annotation.Destination
 
+@OptIn(ExperimentalPermissionsApi::class)
 @HomeNavGraph
 @Destination
 @Composable
@@ -48,14 +49,7 @@ fun BarCodeScreen(navigator: NavigationProvider) {
 
     val context = LocalContext.current
 
-    val options = GmsBarcodeScannerOptions.Builder()
-        .setBarcodeFormats(
-            Barcode.FORMAT_QR_CODE,
-            Barcode.FORMAT_AZTEC)
-        .build()
-
-    val scanner = GmsBarcodeScanning.getClient(context, options)
-
+    val cameraPermissionState = rememberPermissionState(permission = Manifest.permission.CAMERA)
     var isBarCode by rememberSaveable { mutableStateOf(false) }
     var isNfc by rememberSaveable { mutableStateOf(false) }
 
@@ -63,13 +57,20 @@ fun BarCodeScreen(navigator: NavigationProvider) {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
+        if(isBarCode) {
+            BarCodePreview(onDetectedBarCode = {
+                navigator.openProductInfo(it)
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                isBarCode = false
+                isNfc = false
+            })
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(bottom = 80.dp, start = 20.dp, end = 20.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
@@ -78,26 +79,9 @@ fun BarCodeScreen(navigator: NavigationProvider) {
 
                 Button(
                     onClick = {
+                        cameraPermissionState.launchPermissionRequest()
                         isBarCode = true
                         isNfc = false
-
-//                        navigator.openProductInfo("4485149620101")
-                        scanner.startScan().addOnSuccessListener {
-                            isNfc = false
-                            isBarCode = false
-                            it.rawValue?.let { it1 ->
-                                Toast.makeText(context, it1, Toast.LENGTH_SHORT)
-                                    .show()
-                                navigator.openProductInfo(it1)
-                            }
-                                ?: Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT)
-                                    .show()
-                        }.addOnCanceledListener {
-                            isNfc = false
-                            isBarCode = false
-                        }.addOnFailureListener {
-                            Log.d("it", it.stackTraceToString());
-                        }
                     },
                     modifier = Modifier
                         .height(52.dp)

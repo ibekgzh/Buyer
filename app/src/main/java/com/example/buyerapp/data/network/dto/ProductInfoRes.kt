@@ -8,8 +8,7 @@ data class ProductInfoRes(
     val measureUnit: MeasureUnit,
     val price: Long,
     val description: String,
-    val barcode: String,
-    val uid: String
+    val barcode: String
 )
 
 data class MeasureUnit(
@@ -29,5 +28,4 @@ fun ProductInfoRes.toDomain() =
         measureUnit = measureUnit.toDomain(),
         price,
         description,
-        barcode,
-        uid)
+        barcode)

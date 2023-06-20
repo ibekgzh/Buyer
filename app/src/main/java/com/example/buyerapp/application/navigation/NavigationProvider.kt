@@ -23,6 +23,8 @@ interface NavigationProvider {
 
     fun openHome(homeTabsDestination: HomeTabsDestination = HomeTabsDestination.Main)
 
+    fun openHomeForFilterPromo()
+
     fun openPersonalInfo(
         firstname: String,
         lastname: String,

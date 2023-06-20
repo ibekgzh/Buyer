@@ -32,12 +32,11 @@ data class ItemRes(
     val measureUnit: MeasureUnit,
     val price: Int,
     val description: String,
-    val barcode: String,
-    val uid: String
+    val barcode: String
 )
 
 fun ItemRes.toDomain() =
-    Item(id, title, measureUnit.toDomain(), price/100, description, barcode, uid)
+    Item(id, title, measureUnit.toDomain(), price/100, description, barcode)
 
 data class StoreRes(
     val id: Long,

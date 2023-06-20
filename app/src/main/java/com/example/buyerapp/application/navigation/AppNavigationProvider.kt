@@ -20,6 +20,7 @@ import com.example.buyerapp.presenter.destinations.StoreScreenDestination
 import com.example.buyerapp.presenter.home.HomeTabsDestination
 import com.example.buyerapp.presenter.pincode.PinCodeScreenMode
 import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.navigation.popUpTo
 
 class AppNavigationProvider(private val navController: NavController) : NavigationProvider {
 
@@ -61,10 +62,14 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
 
     override fun openHome(homeTabsDestination: HomeTabsDestination) {
         navController.navigate(
-            HomeScreenDestination(homeTabsDestination)
+            HomeScreenDestination(false, homeTabsDestination)
         ) {
             popUpTo(navController.graph.id)
         }
+    }
+
+    override fun openHomeForFilterPromo() {
+        navController.navigate(HomeScreenDestination(true, HomeTabsDestination.Main))
     }
 
     override fun openPersonalInfo(firstname: String, lastname: String, cellphone: String) {
@@ -92,7 +97,11 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
     }
 
     override fun openPromos(storeId: Long) {
-        navController.navigate(PromoScreenDestination(storeId))
+        navController.navigate(PromoScreenDestination(storeId)){
+            popUpTo(PromoScreenDestination){
+                inclusive = true
+            }
+        }
     }
 
     override fun openLastNotificationsOfStores() {

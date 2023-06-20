@@ -11,7 +11,7 @@ data class LastNotificationOfStoreRes (
     val id: Long,
     val imageUrl: String,
     val sentDate: String,
-    val store: StoreRes,
+    val storeInfo: StoreRes,
     val title: String
 )
 
@@ -20,8 +20,9 @@ fun LastNotificationOfStoreRes.toDomain() =
         body,
         id,
         imageUrl,
-        sentDate,
-        store = store.toDomain(),
+        sentDate = sentDate.substring(0, 10),
+        sentTime = sentDate.substring(11, 16),
+        store = storeInfo.toDomain(),
         title
     )
 

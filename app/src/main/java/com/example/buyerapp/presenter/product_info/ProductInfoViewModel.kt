@@ -19,7 +19,6 @@ class ProductInfoViewModel @Inject constructor(
         when (eventType) {
             is ProductEvent.LoadProductInfo -> onLoadProductInfo(eventType.barcode)
             is ProductEvent.AddProduct -> onAddProduct(eventType.amount, eventType.itemId)
-            else -> {}
         }
     }
 
@@ -38,7 +37,6 @@ class ProductInfoViewModel @Inject constructor(
                         "",
                         MeasureUnit("", 0, 0, 0),
                         0,
-                        "",
                         "",
                         ""
                     ), product = Product(amount, itemId)

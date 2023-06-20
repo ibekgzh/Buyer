@@ -18,8 +18,7 @@ data class Item(
     val measureUnit: MeasureUnit,
     val price: Int,
     val description: String,
-    val barcode: String,
-    val uid: String
+    val barcode: String
 )
 
 data class Store(

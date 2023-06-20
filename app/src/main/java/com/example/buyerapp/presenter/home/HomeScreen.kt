@@ -47,6 +47,7 @@ import com.example.buyerapp.presenter.destinations.Destination as HomeDestinatio
 @Destination
 @Composable
 fun HomeScreen(
+    forFilterPromo: Boolean,
     homeDestination: HomeTabsDestination,
     viewModel: HomeViewModel = hiltViewModel(),
     navigator: NavigationProvider
@@ -58,7 +59,12 @@ fun HomeScreen(
     val navController = rememberNavController()
 
     LaunchedEffect(key1 = viewModel, block = {
-        viewModel.onTriggerEvent(HomeEvent.GetCachedStore)
+        if(forFilterPromo) {
+            viewModel.onTriggerEvent(HomeEvent.SearchStore(true))
+        }
+        else {
+            viewModel.onTriggerEvent(HomeEvent.GetCachedStore)
+        }
     })
 
     if (uiState.isLoading) {
@@ -70,12 +76,16 @@ fun HomeScreen(
                     StoreFilter(pageStores, onSearchTextChanged = {
                         viewModel.onTriggerEvent(HomeEvent.SearchStore(searchWord = it))
                     }) { store ->
-                        viewModel.onTriggerEvent(HomeEvent.ChooseStore(store))
+                        if (forFilterPromo) {
+                            navigator.openPromos(store.id)
+                        } else {
+                            viewModel.onTriggerEvent(HomeEvent.ChooseStore(store))
+                        }
                     }
                 }
             },
             sheetShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
-            sheetPeekHeight = if (uiState.state?.hasChosenStore == true) 0.dp else 700.dp
+            sheetPeekHeight = if (uiState.state?.hasChosenStore == true && !forFilterPromo) 0.dp else 700.dp
 
         ) {
             Scaffold(

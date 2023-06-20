@@ -14,7 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
 import com.example.buyerapp.domain.model.Store
 
@@ -35,7 +38,14 @@ fun SearchItemListView(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column {
-                Text(text = store.title)
+                Text(
+                    text = store.title,
+                    fontFamily = FontFamily.Default,
+                    fontStyle = FontStyle.Normal,
+                    fontSize = 18.sp,
+                    lineHeight = 30.sp,
+                    color = colorResource(id = R.color.black1)
+                )
             }
 
             RadioButton(

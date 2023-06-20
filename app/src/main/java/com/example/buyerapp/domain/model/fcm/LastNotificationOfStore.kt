@@ -7,6 +7,7 @@ data class LastNotificationOfStore (
     val id: Long,
     val imageUrl: String,
     val sentDate: String,
-    val store: Store,
+    val sentTime: String,
+    val store: Store?,
     val title: String
 )

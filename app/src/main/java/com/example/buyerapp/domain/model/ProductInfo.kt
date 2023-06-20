@@ -6,8 +6,7 @@ class ProductInfo (
     val measureUnit: MeasureUnit,
     val price: Long,
     val description: String,
-    val barcode: String,
-    val uid: String
+    val barcode: String
 )
 
 data class MeasureUnit(

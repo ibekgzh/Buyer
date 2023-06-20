@@ -118,10 +118,19 @@ dependencies {
     implementation("androidx.room:room-ktx:2.4.2")
     ksp("androidx.room:room-compiler:2.4.2")
 
-    // Scanner QR and Barcode
-    implementation("com.google.android.gms:play-services-code-scanner:16.0.0")
-
     // QR Render
     implementation("com.lightspark:compose-qr-code:1.0.1")
+
+    val cameraxVersion = "1.2.3"
+    implementation("androidx.camera:camera-core:${cameraxVersion}")
+    implementation("androidx.camera:camera-camera2:${cameraxVersion}")
+    implementation("androidx.camera:camera-lifecycle:${cameraxVersion}")
+    implementation("androidx.camera:camera-view:1.3.0-alpha07")
+
+    //Barcode
+    implementation("com.google.mlkit:barcode-scanning:17.1.0")
+
+    //Camera Permission
+    implementation("com.google.accompanist:accompanist-permissions:0.19.0")
 
 }

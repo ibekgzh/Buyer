@@ -48,7 +48,7 @@ fun LastNotificationOfStoreItem(
         )
         Column(modifier = Modifier.align(Alignment.CenterVertically)) {
             Text(
-                text = lastNotificationOfStore.store.title,
+                text = lastNotificationOfStore.store?.title ?: "",
                 fontFamily = FontFamily.Default,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.W600,

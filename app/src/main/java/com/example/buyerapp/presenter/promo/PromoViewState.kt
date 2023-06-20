@@ -3,12 +3,10 @@ package com.example.buyerapp.presenter.promo
 import com.example.buyerapp.core.constants.StandardPageSize
 import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.domain.model.Pageable
-import com.example.buyerapp.domain.model.Store
 import com.example.buyerapp.domain.model.promo.Promo
 
 data class PromoViewState(
     val promos: Pageable<Promo>,
-    val stores: Pageable<Store>? = null
 )
 
 sealed class PromoEvent() {
