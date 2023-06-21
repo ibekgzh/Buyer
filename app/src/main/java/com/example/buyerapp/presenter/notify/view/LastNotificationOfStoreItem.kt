@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -44,17 +47,20 @@ fun LastNotificationOfStoreItem(
             contentDescription = lastNotificationOfStore.imageUrl,
             modifier = Modifier
                 .size(50.dp)
-                .padding(end = 20.dp)
+                .clip(shape = RoundedCornerShape(20.dp)),
+            contentScale = ContentScale.Crop
         )
-        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
+        Column(modifier = Modifier
+            .align(Alignment.CenterVertically)
+            .padding(start = 20.dp)) {
             Text(
-                text = lastNotificationOfStore.store?.title ?: "",
+                text = (lastNotificationOfStore.store?.title ?: "") + " • " + lastNotificationOfStore.sentDate,
                 fontFamily = FontFamily.Default,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.W600,
                 fontSize = 12.sp,
                 lineHeight = 18.sp,
-                color = "#979797".toColor()
+                color = "#A4A4A4".toColor()
             )
             Text(
                 text = lastNotificationOfStore.title,
@@ -63,7 +69,7 @@ fun LastNotificationOfStoreItem(
                 fontWeight = FontWeight.W600,
                 fontSize = 16.sp,
                 lineHeight = 30.sp,
-                color = "#979797".toColor()
+                color = "#111111".toColor()
             )
         }
     }

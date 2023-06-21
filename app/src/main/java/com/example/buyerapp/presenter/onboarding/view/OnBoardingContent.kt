@@ -67,8 +67,8 @@ fun ItemsPager(
     imageLoader: ImageLoader,
     onClick: () -> Unit
 ) {
-    val count = items.size;
-    val state = rememberPagerState();
+    val count = items.size
+    val state = rememberPagerState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         HorizontalPager(
@@ -80,7 +80,8 @@ fun ItemsPager(
             val imgState = painter.state
 
             val transition by animateFloatAsState(
-                targetValue = if (imgState is AsyncImagePainter.State.Success) 1f else 0f
+                targetValue = if (imgState is AsyncImagePainter.State.Success) 1f else 0f,
+                label = ""
             )
 
             Column(
@@ -95,7 +96,7 @@ fun ItemsPager(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(0.dp, 50.dp, 0.dp, 0.dp)
+                        .padding(top = 50.dp)
                         .scale(.8f + (.2f * transition))
                         .graphicsLayer { rotationX = (1f - transition) * 5f }
                         .alpha(Float.min(1f, transition / .2f))

@@ -22,7 +22,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.ImageLoader
-import coil.compose.rememberAsyncImagePainter
 import com.example.buyerapp.R
 import com.example.buyerapp.core.util.toColor
 import com.example.buyerapp.domain.model.order_info.Order

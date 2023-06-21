@@ -58,7 +58,7 @@ fun FilteredNotificationItem(lastNotificationOfStore: LastNotificationOfStore) {
                     .align(alignment = Alignment.Bottom)
             ) {
                 Text(
-                    text = lastNotificationOfStore.sentTime,
+                    text = lastNotificationOfStore.sentTime ?: "",
                     fontFamily = FontFamily.Default,
                     fontStyle = FontStyle.Normal,
                     fontSize = 13.sp,

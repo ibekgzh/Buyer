@@ -7,12 +7,12 @@ import com.example.buyerapp.domain.model.Pageable
 import com.example.buyerapp.domain.model.fcm.LastNotificationOfStore
 
 data class LastNotificationOfStoreRes (
-    val body: String,
     val id: Long,
+    val title: String,
+    val body: String,
     val imageUrl: String,
     val sentDate: String,
-    val storeInfo: StoreRes,
-    val title: String
+    val storeInfo: StoreRes?,
 )
 
 fun LastNotificationOfStoreRes.toDomain() =
@@ -22,7 +22,7 @@ fun LastNotificationOfStoreRes.toDomain() =
         imageUrl,
         sentDate = sentDate.substring(0, 10),
         sentTime = sentDate.substring(11, 16),
-        store = storeInfo.toDomain(),
+        store = storeInfo?.toDomain(),
         title
     )
 

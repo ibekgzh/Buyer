@@ -102,10 +102,9 @@ fun SurfaceTopToolBarBack(
                         )
                     }
                 }
-
             }
         },
         contentColor = Color.White,
-        containerColor = Color.White
+        containerColor = Color.Transparent.copy(0f),
     )
 }
