@@ -2,18 +2,21 @@ package com.example.buyerapp.presenter.home
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
+import androidx.compose.material.Icon
+import androidx.compose.material.Surface
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -88,13 +91,15 @@ fun HomeScreen(
             sheetPeekHeight = if (uiState.state?.hasChosenStore == true && !forFilterPromo) 0.dp else 700.dp
 
         ) {
-            Scaffold(
-                bottomBar = { MBottomNavigation(navController) }) {
-                NavigationGraph(
-                    homeDestination,
-                    navController = navController,
-                    navigator = navigator
-                )
+            Surface(modifier = Modifier.systemBarsPadding()) {
+                Scaffold(
+                    bottomBar = { MBottomNavigation(navController) }) {
+                    NavigationGraph(
+                        homeDestination,
+                        navController = navController,
+                        navigator = navigator
+                    )
+                }
             }
         }
     }
@@ -145,7 +150,7 @@ fun MBottomNavigation(navController: NavController) {
                         contentDescription = destination.label
                     )
                 },
-                selectedContentColor = Color.Black,
+                selectedContentColor = Color.Black.copy(1f),
                 unselectedContentColor = Color.Black.copy(0.4f),
                 alwaysShowLabel = true,
                 selected = currentDestination == destination.direction,

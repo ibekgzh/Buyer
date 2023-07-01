@@ -14,7 +14,7 @@ class GetProductByBarCodeUseCase @Inject constructor(
 
     data class Params(
         val barcode: String,
-        val storeId: Long = 1032,
+        val storeId: Long,
         val uid: String? = null
     )
 

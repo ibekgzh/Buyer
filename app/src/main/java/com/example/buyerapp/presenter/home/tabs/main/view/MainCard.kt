@@ -38,12 +38,12 @@ fun MainCard(onClickBarCode: () -> Unit) {
 
 
     Column(
-    modifier = Modifier
-    .padding(top = 20.dp)
-    .height(400.dp)
-    .fillMaxWidth()
-    .clip(shape = RoundedCornerShape(20.dp))
-    .background(colorResource(id = R.color.gray2))
+        modifier = Modifier
+            .padding(top = 20.dp)
+            .height(400.dp)
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(20.dp))
+            .background(colorResource(id = R.color.gray2))
     ) {
         Column(
             modifier = Modifier

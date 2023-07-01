@@ -44,7 +44,7 @@ class PinCodeViewModel @Inject constructor(
 
     private fun onLogout() = safeLaunch {
         execute(logoutUseCase(Unit)){
-            effectChannel.trySend(PinCodeEffect.OnNavigateUp)
+            effectChannel.trySend(PinCodeEffect.OnLogout)
         }
     }
 }

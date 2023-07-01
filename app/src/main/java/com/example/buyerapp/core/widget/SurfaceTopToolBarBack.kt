@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -37,13 +38,16 @@ fun SurfaceTopToolBarBack(
     title: String = "",
     onClickCommonButton: () -> Unit = {},
     onShowCommonButton: Boolean = false,
-    pageContent: @Composable () -> Unit,
+    pageContent: @Composable () -> Unit
 ) {
+
     Scaffold(
+        modifier = Modifier.systemBarsPadding(),
         content = { padding ->
             Column(
                 modifier = Modifier
                     .padding(padding)
+                    .systemBarsPadding()
             ) {
                 pageContent()
             }
@@ -105,6 +109,7 @@ fun SurfaceTopToolBarBack(
             }
         },
         contentColor = Color.White,
-        containerColor = Color.Transparent.copy(0f),
+        containerColor =  Color.White,
     )
 }
+

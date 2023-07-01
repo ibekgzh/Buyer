@@ -12,11 +12,11 @@ data class OrderCreateReq(
 data class OrderItemReq(
     val itemId: Int,
     val price: Int,
-    val quantity: Int
+    val qunatity: Int
 )
 
 fun Cart.toOrderDto() = OrderCreateReq(
-    items = items.map { OrderItemReq(it.item.id, it.item.price * 100, it.amount) },
+    items = items.map { OrderItemReq(it.item.id, it.item.price * 100 * it.amount, it.amount) },
     paymentTypeId = 0,
     storeId = store!!.id,
     totalPrice = totalPrice * 100

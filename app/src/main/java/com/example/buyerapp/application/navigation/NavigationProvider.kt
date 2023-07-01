@@ -46,4 +46,6 @@ interface NavigationProvider {
     fun openLastNotificationsOfStores()
 
     fun openFilteredNotifications(storeId: Long)
+
+    fun logout()
 }

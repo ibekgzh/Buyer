@@ -221,7 +221,7 @@ fun Card(
                 }
 
                 Text(
-                    text = cartItem.item.price.toString(),
+                    text = "₸ " + cartItem.item.price.toString(),
                     fontFamily = FontFamily.Default,
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight.W600,

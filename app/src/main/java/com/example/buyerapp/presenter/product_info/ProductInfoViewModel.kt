@@ -5,6 +5,7 @@ import com.example.buyerapp.data.network.dto.Product
 import com.example.buyerapp.domain.model.MeasureUnit
 import com.example.buyerapp.domain.model.ProductInfo
 import com.example.buyerapp.domain.usecase.AddProductUseCase
+import com.example.buyerapp.domain.usecase.GetCachedStoreUseCase
 import com.example.buyerapp.domain.usecase.GetProductByBarCodeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,7 +13,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductInfoViewModel @Inject constructor(
     private val getProductByBarCodeUseCase: GetProductByBarCodeUseCase,
-    private val addProductUseCase: AddProductUseCase
+    private val addProductUseCase: AddProductUseCase,
+    private val getCachedStoreUseCase: GetCachedStoreUseCase
 ) :
     MviViewModel<ProductViewState, ProductEvent, ProductEffect>() {
     override fun onTriggerEvent(eventType: ProductEvent) {
@@ -23,8 +25,16 @@ class ProductInfoViewModel @Inject constructor(
     }
 
     private fun onLoadProductInfo(barcode: String) = safeLaunch {
-        execute(getProductByBarCodeUseCase(GetProductByBarCodeUseCase.Params(barcode))) {
-            setState(ProductViewState(productInfo = it, product = Product("", "")))
+        safeLaunch {
+            call(getCachedStoreUseCase(Unit)){
+                it?.let {
+                    safeLaunch {
+                        execute(getProductByBarCodeUseCase(GetProductByBarCodeUseCase.Params(barcode, it.id))) {
+                            setState(ProductViewState(productInfo = it, product = Product("", "")))
+                        }
+                    }
+                }
+            }
         }
     }
 

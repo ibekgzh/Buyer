@@ -2,6 +2,7 @@ package com.example.buyerapp.presenter.store.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import com.example.buyerapp.R
+import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.domain.model.store.StoreDetails
 
 @Composable
@@ -49,16 +51,19 @@ fun StoreScreenContent(
     onChangedStore: () -> Unit,
     onClickBarCode: () -> Unit,
     onCheckedNotify: (checked: Boolean) -> Unit,
-    imageLoader: ImageLoader
+    imageLoader: ImageLoader,
+    navigator: NavigationProvider
 ) {
 
     val largeLogo = rememberAsyncImagePainter(storeDetails.largeLogo, imageLoader)
     val logo = rememberAsyncImagePainter(storeDetails.logo, imageLoader)
 
     Surface(modifier = Modifier.fillMaxSize()) {
+
         Column {
 
             Boxes(modifier = Modifier.fillMaxWidth()) {
+
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -69,9 +74,18 @@ fun StoreScreenContent(
                 )
                 Box(
                     modifier = Modifier
-                        .size(77.dp)
+                        .size(70.dp)
                         .clip(shape = RoundedCornerShape(20.dp))
                         .paint(logo)
+                )
+
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .clip(shape = RoundedCornerShape(20.dp))
+                        .background(colorResource(id = R.color.back_button_background))
+                        .paint(painterResource(id = R.drawable.arrow_right))
+                        .clickable(onClick = { navigator.navigateUp() })
                 )
             }
 
@@ -174,7 +188,7 @@ fun StoreScreenContent(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 20.dp, end = 20.dp),
+                    .padding(start = 20.dp, end = 20.dp, bottom = 50.dp),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -231,15 +245,17 @@ fun Boxes(
     Layout(
         modifier = modifier,
         content = content,
-    ) { measurables, constraints ->
-        val largeBox = measurables[0]
-        val smallBox = measurables[1]
+    ) { measures, constraints ->
+        val largeBox = measures[0]
+        val smallBox = measures[1]
+        val backBox = measures[2]
         val looseConstraints = constraints.copy(
             minWidth = 0,
             minHeight = 0,
         )
         val largePlaceable = largeBox.measure(looseConstraints)
         val smallPlaceable = smallBox.measure(looseConstraints)
+        val backBoxPlaceable = backBox.measure(looseConstraints)
         layout(
             width = constraints.maxWidth,
             height = largePlaceable.height + smallPlaceable.height / 2,
@@ -250,7 +266,11 @@ fun Boxes(
             )
             smallPlaceable.placeRelative(
                 x = (constraints.maxWidth - smallPlaceable.width) / 2,
-                y = largePlaceable.height - smallPlaceable.height / 2
+                y = largePlaceable.height - smallPlaceable.height / 2,
+            )
+            backBoxPlaceable.placeRelative(
+                x = 50,
+                y = 80
             )
         }
     }

@@ -111,4 +111,10 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
     override fun openFilteredNotifications(storeId: Long) {
         navController.navigate(FilteredNotificationsScreenDestination(storeId))
     }
+
+    override fun logout() {
+        navController.navigate(OnBoardingScreenDestination) {
+            popUpTo(navController.graph.id)
+        }
+    }
 }

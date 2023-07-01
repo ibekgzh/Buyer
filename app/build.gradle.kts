@@ -133,4 +133,7 @@ dependencies {
     //Camera Permission
     implementation("com.google.accompanist:accompanist-permissions:0.19.0")
 
+    // Status bar customization
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
+    implementation("com.google.accompanist:accompanist-insets:0.30.0")
 }

@@ -5,15 +5,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
 import com.example.buyerapp.core.framework.mvi.BaseEffect
 import com.example.buyerapp.core.widget.LoadingView
-import com.example.buyerapp.core.widget.SurfaceTopToolBarBack
 import com.example.buyerapp.presenter.home.HomeTabsDestination
 import com.example.buyerapp.presenter.store.view.StoreScreenContent
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -31,13 +32,13 @@ fun StoreScreen(
         viewModel.onTriggerEvent(StoreEvent.LoadDetails(id))
     })
 
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(color = Color.Transparent)
+
     if (uiState.isLoading) {
         LoadingView()
     } else {
         uiState.state?.let {
-            SurfaceTopToolBarBack(
-                onOnclickBackButton = { navigator.navigateUp() }
-            ) {
                 StoreScreenContent(
                     it.storeDetails,
                     onChangedStore = {
@@ -49,10 +50,10 @@ fun StoreScreen(
                     onCheckedNotify = {
                         viewModel.onTriggerEvent(StoreEvent.ChangeNotifyState(it, id))
                     },
-                    viewModel.imageLoader
+                    viewModel.imageLoader,
+                    navigator
                 )
             }
-        }
     }
 
     viewModel.effect.collectInLaunchedEffect { effect ->

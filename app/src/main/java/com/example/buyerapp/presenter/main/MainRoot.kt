@@ -4,11 +4,13 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.buyerapp.application.navigation.AppNavigationProvider
 import com.example.buyerapp.presenter.NavGraphs
 import com.example.buyerapp.ui.theme.BuyerAppTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
 
@@ -26,13 +28,18 @@ fun MainRoot(finish: () -> Unit) {
         }
     }
 
-    BuyerAppTheme {
-        Surface {
-            DestinationsNavHost(
-                navController = navController,
-                navGraph = NavGraphs.root,
-                dependenciesContainerBuilder = { dependency(AppNavigationProvider(navController)) }
-            )
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = true)
+
+//    ProvideWindowInsets {
+        BuyerAppTheme {
+            Surface {
+                DestinationsNavHost(
+                    navController = navController,
+                    navGraph = NavGraphs.root,
+                    dependenciesContainerBuilder = { dependency(AppNavigationProvider(navController)) }
+                )
+            }
         }
-    }
+//    }
 }

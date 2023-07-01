@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.ImageLoader
 import com.example.buyerapp.R
 import com.example.buyerapp.core.util.toColor
 import com.example.buyerapp.domain.model.order_info.Order
@@ -29,12 +28,8 @@ import com.example.buyerapp.domain.model.order_info.Order
 @Composable
 fun OrderItem(
     order: Order,
-    imageLoader: ImageLoader,
     onSelectItem: (order: Order) -> Unit
 ) {
-
-//    val painter = rememberAsyncImagePainter(order.store.logo, imageLoader)
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -83,7 +78,7 @@ fun OrderItem(
             }
 
             Text(
-                "-${order.price.toString()} KZT",
+                "-${order.price} KZT",
                 fontFamily = FontFamily.Default,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.W600,

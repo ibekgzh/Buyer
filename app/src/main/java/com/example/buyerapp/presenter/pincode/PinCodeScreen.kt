@@ -2,15 +2,18 @@ package com.example.buyerapp.presenter.pincode
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetState
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -75,27 +78,33 @@ fun PinCodeScreen(
         LoadingView()
     } else {
         uiState.state?.let {
-            PinCodeBody(
-                headerContent = {
-                    PinCodeHeader(
-                        fullName = it.userInfo.longname(),
-                        onLogout = {
-                            viewModel.onTriggerEvent(PinCodeEvent.Logout)
-                        },
-                        onClose = {
-                            navigator.navigateUp()
+
+            Surface(modifier = Modifier.systemBarsPadding()) {
+                PinCodeBody(
+                    headerContent = {
+                        PinCodeHeader(
+                            fullName = it.userInfo.longname(),
+                            onLogout = {
+                                viewModel.onTriggerEvent(PinCodeEvent.Logout)
+                            },
+                            onClose = {
+                                navigator.navigateUp()
+                            }
+                        )
+                    }) {
+
+                    PinCodeView(
+                        length = 4,
+                        title = title(mode),
+                        onInputComplete = { onInputComplete(it) },
+                        onForgetPinClick = {
+                            navigator.openConfirmOtp(
+                                it.userInfo.cellphone,
+                                ConfirmOtpType.PIN_RESET
+                            )
                         }
                     )
-                }) {
-
-                PinCodeView(
-                    length = 4,
-                    title = title(mode),
-                    onInputComplete = { onInputComplete(it) },
-                    onForgetPinClick = {
-                        navigator.openConfirmOtp(it.userInfo.cellphone, ConfirmOtpType.PIN_RESET)
-                    }
-                )
+                }
             }
         }
     }
@@ -106,7 +115,7 @@ fun PinCodeScreen(
                 .show()
 
             is PinCodeEffect.OnNavigateHome -> navigator.openHome()
-            is PinCodeEffect.OnNavigateUp -> navigator.navigateUp()
+            is PinCodeEffect.OnLogout -> navigator.logout()
             is PinCodeEffect.OnNavigateUpProfile -> {
                 Toast.makeText(context, "Код-пароль успешно изменен", Toast.LENGTH_SHORT).show()
                 navigator.navigateUp(HomeScreenDestination)
