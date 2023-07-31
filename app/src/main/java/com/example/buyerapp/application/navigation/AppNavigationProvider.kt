@@ -18,6 +18,7 @@ import com.example.buyerapp.presenter.destinations.ProductInfoScreenDestination
 import com.example.buyerapp.presenter.destinations.PromoScreenDestination
 import com.example.buyerapp.presenter.destinations.StoreScreenDestination
 import com.example.buyerapp.presenter.home.HomeTabsDestination
+import com.example.buyerapp.presenter.order.details.OrderDetailType
 import com.example.buyerapp.presenter.pincode.PinCodeScreenMode
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.popUpTo
@@ -92,8 +93,8 @@ class AppNavigationProvider(private val navController: NavController) : Navigati
         navController.navigate(OrderHistoryScreenDestination)
     }
 
-    override fun openOrderDetails(id: Long) {
-        navController.navigate(OrderDetailsScreenDestination(id))
+    override fun openOrderDetails(id: Long, orderType: OrderDetailType) {
+        navController.navigate(OrderDetailsScreenDestination(id,orderType))
     }
 
     override fun openPromos(storeId: Long) {

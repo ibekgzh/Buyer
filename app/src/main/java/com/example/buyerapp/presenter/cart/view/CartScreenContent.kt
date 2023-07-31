@@ -58,7 +58,7 @@ fun CartScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(20.dp)
+            .padding(top = 20.dp, start = 20.dp, end = 20.dp)
     ) {
         LazyColumn(modifier = Modifier.weight(1f)) {
             itemsIndexed(items = cart.items, key = { _, item -> item.hashCode() }) { _, item ->
@@ -240,7 +240,7 @@ fun BottomBar(totalPrice: Int, onOrder: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 20.dp, bottom = 20.dp, end = 20.dp)
+            .padding(start = 20.dp, end = 20.dp)
     ) {
 
         Divider(

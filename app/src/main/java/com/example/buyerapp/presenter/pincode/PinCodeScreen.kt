@@ -1,6 +1,11 @@
 package com.example.buyerapp.presenter.pincode
 
 import android.widget.Toast
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
+import androidx.biometric.BiometricPrompt
+import androidx.biometric.BiometricPrompt.AuthenticationCallback
+import androidx.biometric.BiometricPrompt.ERROR_NEGATIVE_BUTTON
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.BottomSheetScaffold
@@ -16,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.buyerapp.application.navigation.NavigationProvider
 import com.example.buyerapp.core.framework.extension.collectInLaunchedEffect
@@ -27,6 +33,7 @@ import com.example.buyerapp.presenter.confirm_otp.ConfirmOtpType
 import com.example.buyerapp.presenter.destinations.HomeScreenDestination
 import com.example.buyerapp.presenter.pincode.view.PinCodeHeader
 import com.ramcosta.composedestinations.annotation.Destination
+
 
 @Destination
 @Composable
@@ -40,8 +47,47 @@ fun PinCodeScreen(
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
+
+    val biometricPrompt = BiometricPrompt(
+        context as FragmentActivity,
+        object: AuthenticationCallback() {
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                navigator.openHome()
+            }
+            override fun onAuthenticationFailed() {
+                Toast.makeText(context, "Отпечаток пальца не распознан. Попробуйте еще раз!", Toast.LENGTH_SHORT).show();
+            }
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                Toast.makeText(context, "Отпечаток пальца не распознан. Попробуйте еще раз!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    )
+
+
+    val checkAndAuthenticate: () -> Unit = {
+        val biometricManager = BiometricManager.from(context as FragmentActivity);
+        when(biometricManager.canAuthenticate(BIOMETRIC_WEAK)){
+            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
+                Toast.makeText(context, "Biometric Authentication currently unavailable", Toast.LENGTH_SHORT).show()
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
+                Toast.makeText(context, "Your device doesn't support Biometric Authentication", Toast.LENGTH_SHORT).show()
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED ->
+                Toast.makeText(context, "Your device doesn't have any fingerprint enrolled", Toast.LENGTH_SHORT).show()
+            BiometricManager.BIOMETRIC_SUCCESS -> {
+                val promptInfo: BiometricPrompt.PromptInfo = BiometricPrompt.PromptInfo.Builder()
+                    .setTitle("Вход")
+                    .setSubtitle("Через отпечаток пальца")
+                    .setDescription("Пожалуйста, вставьте палец для разблокировки")
+                    .setNegativeButtonText("Отмена")
+                    .build()
+                biometricPrompt.authenticate(promptInfo)
+            }
+        }
+    }
+
     LaunchedEffect(key1 = viewModel, block = {
         viewModel.onTriggerEvent(PinCodeEvent.GetUserInfo)
+        checkAndAuthenticate()
     })
 
     val title: (mode: PinCodeScreenMode) -> String = {
@@ -102,6 +148,9 @@ fun PinCodeScreen(
                                 it.userInfo.cellphone,
                                 ConfirmOtpType.PIN_RESET
                             )
+                        },
+                        onBiometricPrompt = {
+                            checkAndAuthenticate()
                         }
                     )
                 }

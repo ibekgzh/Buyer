@@ -47,7 +47,7 @@ fun ProductInfoScreen(
                                     product.productInfo.id.toString()
                                 )
                             )
-                            navigator.navigateUp()
+                            navigator.openCart()
                         }
                     )
                 }

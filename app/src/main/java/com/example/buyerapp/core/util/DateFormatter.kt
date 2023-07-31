@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
-fun dateTomorrow() = dateBeforeDays(1)
+fun dateTomorrow() = dateBeforeDays(-1)
 
-fun dateYesterday() = dateBeforeDays(2)
+fun dateYesterday() = dateBeforeDays(1)
 
 fun dateBeforeWeek() = dateBeforeDays(7)
 

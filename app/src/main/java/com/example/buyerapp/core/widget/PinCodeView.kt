@@ -39,7 +39,8 @@ fun PinCodeView(
     length: Int,
     title: String,
     onInputComplete: (pin: String) -> Unit,
-    onForgetPinClick: () -> Unit
+    onForgetPinClick: () -> Unit,
+    onBiometricPrompt: () -> Unit,
 ) {
 
     val pinCodes = rememberMutableStateListOf<String>()
@@ -84,7 +85,7 @@ fun PinCodeView(
                 }
             }
 
-            Digits(table, pinCodes, length, onInputComplete)
+            Digits(table, pinCodes, length, onInputComplete, onBiometricPrompt)
 
             Text(
                 text = "Забыли код?",
@@ -136,7 +137,8 @@ fun Digits(
     table: Array<Array<Int>>,
     pinCodes: SnapshotStateList<String>,
     length: Int,
-    onInputComplete: (pin: String) -> Unit
+    onInputComplete: (pin: String) -> Unit,
+    onBiometricPrompt: () -> Unit
 ) {
     for (indexA in table) {
         Row(
@@ -151,16 +153,17 @@ fun Digits(
                     Row(
                         modifier = Modifier
                             .size(50.dp)
+                            .clip(CircleShape)
+                            .clickable {
+                                onBiometricPrompt()
+                            },
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = indexB.toString(),
-                            fontFamily = FontFamily.Default,
-                            fontStyle = FontStyle.Normal,
-                            fontWeight = FontWeight.W500,
-                            fontSize = 30.sp,
-                            lineHeight = 30.sp,
-                            color = Color.White,
-                            modifier = Modifier
+                        Image(
+                            painter = painterResource(R.drawable.faceid),
+                            contentDescription = "Remove pin code",
+                            contentScale = ContentScale.Crop
                         )
                     }
                 }

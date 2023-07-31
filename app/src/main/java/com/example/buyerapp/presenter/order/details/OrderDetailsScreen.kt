@@ -35,7 +35,8 @@ import kotlinx.coroutines.launch
 fun OrderDetailsScreen(
     id: Long,
     viewModel: OrderDetailsViewModel = hiltViewModel(),
-    navigator: NavigationProvider
+    navigator: NavigationProvider,
+    typeOrder: OrderDetailType
 ) {
 
     val uiState by viewModel.uiState.collectAsState()
@@ -66,7 +67,12 @@ fun OrderDetailsScreen(
     } else {
         uiState.state?.let { state ->
             SurfaceTopToolBarBack(
-                onOnclickBackButton = { navigator.navigateUp() },
+                onOnclickBackButton = {
+                    when(typeOrder){
+                        OrderDetailType.ORDER_HISTORY -> navigator.navigateUp()
+                        OrderDetailType.CART_SCREEN -> navigator.openHome()
+                    }
+                },
                 title = "Чек"
             ) {
                 ModalBottomSheetLayout(
@@ -90,4 +96,9 @@ fun OrderDetailsScreen(
                 .show()
         }
     }
+}
+
+enum class OrderDetailType {
+    CART_SCREEN,
+    ORDER_HISTORY
 }

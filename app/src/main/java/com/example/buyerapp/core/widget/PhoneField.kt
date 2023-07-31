@@ -10,12 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.buyerapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,11 +34,26 @@ fun PhoneField(
 ) {
     OutlinedTextField(
         value = phone,
+        textStyle = TextStyle(
+            fontSize = 13.sp,
+            lineHeight = 20.sp,
+            fontFamily = FontFamily.Default,
+            fontStyle = FontStyle.Normal,
+            fontWeight = FontWeight.W400,
+        ),
         onValueChange = { it ->
             onPhoneChanged(it.take(mask.count { it == maskNumber }))
         },
         placeholder = {
-            Text(text = "+7 (777) 000 00 00")
+            Text(
+                text = "+7 (777) 000 00 00",
+                fontFamily = FontFamily.Default,
+                fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.W400,
+                fontSize = 13.sp,
+                lineHeight = 20.sp,
+                color = colorResource(id = R.color.black2),
+            )
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
         visualTransformation = PhoneVisualTransformation(mask, maskNumber),

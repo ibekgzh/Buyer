@@ -57,7 +57,7 @@ fun BarCodeScreen(navigator: NavigationProvider) {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
-        if(isBarCode) {
+        if (isBarCode) {
             BarCodePreview(onDetectedBarCode = {
                 navigator.openProductInfo(it)
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
@@ -123,15 +123,15 @@ fun BarCodeScreen(navigator: NavigationProvider) {
                         .height(52.dp)
                         .weight(1f),
                     colors = ButtonDefaults.buttonColors(
-                        contentColor = if (isNfc) Color.White else Color.Black,
-                        containerColor = if (isNfc) Color.Black else Color.LightGray
+                        contentColor = Color.Black,
+                        containerColor = Color.LightGray.copy(alpha = 0.3f)
                     ),
                     shape = RoundedCornerShape(80.dp)
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.nfc_btn),
                         contentDescription = "NFC",
-                        colorFilter = if (isNfc) ColorFilter.tint(Color.White) else ColorFilter.tint(
+                        colorFilter = ColorFilter.tint(
                             Color.Black
                         ),
                         modifier = Modifier.padding(end = 27.dp)

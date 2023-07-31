@@ -1,5 +1,6 @@
 package com.example.buyerapp.core.widget
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -40,6 +41,10 @@ fun SurfaceTopToolBarBack(
     onShowCommonButton: Boolean = false,
     pageContent: @Composable () -> Unit
 ) {
+
+    BackHandler {
+        onOnclickBackButton()
+    }
 
     Scaffold(
         modifier = Modifier.systemBarsPadding(),

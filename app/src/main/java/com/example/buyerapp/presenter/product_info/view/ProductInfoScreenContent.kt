@@ -53,8 +53,9 @@ fun ProductInfoScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(20.dp)
-            .verticalScroll(rememberScrollState())
+            .padding(top = 20.dp, end = 20.dp, start = 20.dp)
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
 
         Column {
@@ -151,70 +152,67 @@ fun ProductInfoScreenContent(
                 color = Color.Black,
                 modifier = Modifier.padding(top = 46.dp)
             )
+        }
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Bottom
+        Column {
+
+            Divider(
+                color = colorResource(id = R.color.gray2),
+                thickness = 1.dp,
+                modifier = Modifier.padding(bottom = 5.dp)
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-
-                Divider(
-                    color = colorResource(id = R.color.gray2),
-                    thickness = 1.dp,
-                    modifier = Modifier.padding(bottom = 5.dp)
+                Text(
+                    text = "Итого:",
+                    fontFamily = FontFamily.Default,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight.W600,
+                    fontSize = 16.sp,
+                    lineHeight = 30.sp,
+                    color = Color.Black,
+                    textAlign = TextAlign.Center
                 )
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Итого:",
-                        fontFamily = FontFamily.Default,
-                        fontStyle = FontStyle.Normal,
-                        fontWeight = FontWeight.W600,
-                        fontSize = 16.sp,
-                        lineHeight = 30.sp,
-                        color = Color.Black,
-                        textAlign = TextAlign.Center
-                    )
+                Text(
+                    text = "₸ " + (product.price / 100) * count,
+                    fontFamily = FontFamily.Default,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight.W500,
+                    fontSize = 26.sp,
+                    lineHeight = 30.sp,
+                    color = Color.Black,
+                    textAlign = TextAlign.Center
+                )
+            }
 
-                    Text(
-                        text = "₸ " + (product.price / 100) * count,
-                        fontFamily = FontFamily.Default,
-                        fontStyle = FontStyle.Normal,
-                        fontWeight = FontWeight.W500,
-                        fontSize = 26.sp,
-                        lineHeight = 30.sp,
-                        color = Color.Black,
-                        textAlign = TextAlign.Center
-                    )
-                }
-
-                Row(
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+            ) {
+                Button(
+                    onClick = {
+                        onClickAdd(count.toString())
+                    },
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp),
-                ) {
-                    Button(
-                        onClick = {
-                            onClickAdd(count.toString())
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth(1f)
-                            .width(335.dp)
-                            .height(52.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            contentColor = Color.White, containerColor = Color.Black
-                        ),
-                        shape = RoundedCornerShape(80.dp)
+                        .fillMaxWidth(1f)
+                        .width(335.dp)
+                        .height(52.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = Color.White, containerColor = Color.Black
+                    ),
+                    shape = RoundedCornerShape(80.dp)
 
-                    ) {
-                        Text(text = "Продолжить")
-                    }
+                ) {
+                    Text(text = "Продолжить")
                 }
             }
         }
+
     }
 }

@@ -14,6 +14,7 @@ import com.example.buyerapp.core.widget.LoadingView
 import com.example.buyerapp.core.widget.SurfaceTopToolBarBack
 import com.example.buyerapp.presenter.cart.view.CartScreenContent
 import com.example.buyerapp.presenter.home.HomeTabsDestination
+import com.example.buyerapp.presenter.order.details.OrderDetailType
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -68,7 +69,7 @@ fun CartScreen(
                     "Оформлен заказ № ${effect.id}",
                     Toast.LENGTH_SHORT
                 ).show()
-                navigator.navigateUp()
+                navigator.openOrderDetails(effect.id.toLong(), OrderDetailType.CART_SCREEN)
             }
         }
     }

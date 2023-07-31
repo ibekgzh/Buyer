@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,7 +44,7 @@ fun OrderDetailsContent(order: OrderDetails, onClickQrCode: (code: String) -> Un
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(bottom = 40.dp)
+            .padding(bottom = 20.dp)
     ) {
 
         LazyColumn(
@@ -86,10 +87,14 @@ fun OrderDetailsContent(order: OrderDetails, onClickQrCode: (code: String) -> Un
                                 fontStyle = FontStyle.Normal,
                                 fontWeight = FontWeight.W600,
                                 fontSize = 15.sp,
-                                lineHeight = 30.sp,
+                                lineHeight = 15.sp,
                                 color = Color.Black,
-                                textAlign = TextAlign.Start
+                                textAlign = TextAlign.Start,
+                                modifier = Modifier.weight(0.6f)
                             )
+
+                            Spacer(modifier = Modifier.weight(0.1f))
+
                             Text(
                                 text = (it.totalPrice / 100).toString() + " KZT",
                                 fontFamily = FontFamily.Default,
@@ -98,7 +103,8 @@ fun OrderDetailsContent(order: OrderDetails, onClickQrCode: (code: String) -> Un
                                 fontSize = 13.sp,
                                 lineHeight = 30.sp,
                                 color = Color.Black,
-                                textAlign = TextAlign.End
+                                textAlign = TextAlign.End,
+                                modifier = Modifier.weight(0.3f)
                             )
                         }
                     }

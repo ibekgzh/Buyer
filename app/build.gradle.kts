@@ -68,6 +68,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.appcompat:appcompat:1.6.1")
     val hilt_version = "2.46.1"
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -136,4 +137,6 @@ dependencies {
     // Status bar customization
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
     implementation("com.google.accompanist:accompanist-insets:0.30.0")
+
+    implementation("androidx.biometric:biometric:1.1.0")
 }

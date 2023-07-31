@@ -141,7 +141,7 @@ fun MainCard(onClickBarCode: () -> Unit) {
                         Modifier
                             .size(60.dp)
                             .clip(shape = RoundedCornerShape(20.dp))
-                            .background(Color.Black)
+                            .background(Color.Black.copy(alpha = 0.3f))
                             .clickable { },
                         contentAlignment = Alignment.Center
                     ) {
