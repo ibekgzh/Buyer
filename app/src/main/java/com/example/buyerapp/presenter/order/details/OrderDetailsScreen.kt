@@ -39,6 +39,7 @@ fun OrderDetailsScreen(
     typeOrder: OrderDetailType
 ) {
 
+
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
